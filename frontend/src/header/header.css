@@ -1,0 +1,254 @@
+.select-box {
+  padding: 10px !important;
+  background-color: #fff;
+  border-color: #f4f4f4;
+  border-radius: 5px;
+}
+
+.bg-color {
+  background-color: #f5f5f7 !important;
+}
+
+.navbar-margin {
+  margin: 1.5rem 1.5rem 0rem 1.5rem;
+}
+
+@media (max-width: 1400px) {
+  .navbar-margin {
+    margin: 1.5rem 1.5rem 0rem 1.5rem;
+  }
+}
+
+/* HoverForm.css */
+
+.hover-form {
+  position: relative;
+  display: inline-block;
+}
+
+.hover-button {
+  border: none;
+  /* padding: 8px 16px; */
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.hover-button span.icon {
+  background: #fff;
+  color: #000;
+  border-radius: 50%;
+  float: left;
+  margin-right: 10px;
+}
+
+.input-group-text {
+  padding: 0.375rem;
+  background-color: white;
+}
+
+.input-group-prepend .input-group-text .icon {
+  background: #fff;
+  color: #0070ad;
+  padding: 4px;
+  border-radius: 4px;
+}
+
+.input-group-append .input-group-text .icon {
+  color: #0070ad;
+  padding: 4px;
+  border-radius: 4px;
+}
+
+.input-group select {
+  border-left: none;
+  border-right: none;
+  height: 45px;
+}
+
+.hover-button:hover {
+  background-color: #fff;
+  color: #98bccc !important;
+  /* Darker purple on hover */
+}
+
+.form-container {
+  min-width: 300px;
+  padding: 16px;
+  z-index: 1;
+}
+
+.form-title {
+  color: #6a5acd;
+  /* Light purple */
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+select,
+input,
+textarea {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+.logo {
+  width: 160px;
+}
+
+.profile-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  margin: auto;
+  display: block;
+  color: #6499b1;
+}
+.campaign-icon {
+  border-radius: 50%;
+  margin: auto;
+  display: block;
+  color: #6499b1;
+  margin-bottom: 2px;
+}
+.min-w-15 {
+  min-width: 15rem;
+}
+.dropdown-icon {
+  margin-left: auto;
+  color: #adadad;
+}
+.text-bold {
+  font-weight: bold;
+}
+.text-dark-grey {
+  color: #827b7b;
+}
+.half-width {
+  width: 70%;
+}
+
+.skyblue:hover {
+  background-color: #a1cae1 !important;
+}
+.progress-icon-output-dim {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  color: #025a82 !important;
+  cursor: default;
+}
+.progress-icon-output-hover {
+  color: #025a82 !important;
+  cursor: default;
+}
+
+.custom-button {
+  background-color: #005a82 !important;
+}
+.dropdown-menu #logout-button:hover {
+  background-color: transparent !important;
+}
+.dropdown-content {
+  top: 0%;
+}
+.dropdown-menu #logout-button {
+  margin-left: -6px;
+}
+
+.navbar-img {
+  background-image: url('/top-Header-SVG.svg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.navbar-padding {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.network-recheck-modal {
+  min-width: 60vw;
+  min-height: 90vh !important;
+  overflow: auto;
+}
+.recheck-disabled {
+  text-decoration: none;
+  color: darkgrey;
+  opacity: 0.65;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.byouc-icon {
+  color: #6499b1;
+}
+.byouc-icon:hover {
+  color: #025a82 !important;
+}
+.custom-icon {
+  font-size: 28px;
+  width: 28px;
+  height: 28px;
+}
+.custom-icon-campaign {
+  font-size: 32px;
+  width: 28px;
+  height: 28px;
+}
+
+/*.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}*/
+
+.navbar-menu {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-dropdown {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+.navbar-amp-logo {
+  /* position: absolute;
+    bottom: 10px; */
+  /* left: 150%; */
+  transform: translateX(25%);
+  /* top: 650px; */
+  width: 29px;
+  height: 32px;
+  overflow: auto;
+}
+
+.navbar-amp-logo img {
+  display: block;
+  width: 24px;
+  height: 20px;
+}
+
+/* Prevent hover color change for the Interact button and its icon */
+.hover-button,
+.hover-button:hover,
+.hover-button:focus {
+  background: #fff !important;
+  color: inherit !important;
+  box-shadow: none !important;
+}
+
+.hover-button img,
+.hover-button:hover img,
+.hover-button:focus img {
+  filter: none !important;
+}

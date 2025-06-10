@@ -1,0 +1,499 @@
+/* Add these styles to your CSS file */
+.card {
+    border: 1px solid #ccc;
+    padding: 10px;
+    transition: all 0.3s ease;
+    margin: 10px;
+  }
+  
+  .card-progress {
+    margin: 16px 10px 0px 10px;
+    width: 100%;
+  }
+  
+  .card.card-main {
+    border: none;
+    margin: 30px 18px 10px 12px !important;
+    border-radius: 24px !important;
+  }
+  
+  .card.card-main.stepper-card {
+    padding: 10px 8px 24px 8px !important;
+    border: none;
+    margin: 24px 12px 24px 8px !important;
+    background-color: #f9f9f9 !important;
+    border-radius: 24px !important;
+  }
+  
+  .card.card-main.input-card {
+    padding: 10px 5px 24px 8px !important;
+    background: #f9f9f9 0% 0% no-repeat padding-box;
+    border-radius: 24px !important;
+    opacity: 1;
+    margin: 16px 8px 24px 8px !important;
+    background-color: #f9f9f9;
+  }
+  
+  .card.card-main.output-card {
+    padding: 10px 14px 24px 24px !important;
+    background: #f9f9f9 0% 0% no-repeat padding-box !important;
+    border-radius: 24px;
+    margin: 16px 12px 24px 8px !important;
+    opacity: 1;
+  }
+  
+  .stepper-card .card-header,
+  .stepper-card .card-body,
+  .input-card .card-header,
+  .input-card .card-body,
+  .output-card .card-header {
+    background-color: #f9f9f9 !important;
+  }
+  
+  .output-card .card-body,
+  .output-card .output-body {
+    background-color: #ffffff !important;
+  }
+  
+  .chat_input {
+    height: 55px;
+    border-top-right-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+    border-right: none;
+  }
+  
+  .chat-window {
+    border-radius: 40px;
+    background: #f5f5f7;
+    padding: 10px;
+  }
+  
+  .chat-window .input-group .form-check-input {
+    margin-top: 0px;
+  }
+  
+  .chat-window .input-group .input-group-text {
+    border-top-left-radius: 0px !important;
+    border-bottom-left-radius: 0px !important;
+    border-left: none;
+  }
+  
+  .chat-window .input-group .input-group-text.disabled {
+    background-color: #e9ecef;
+  }
+  
+  .chat-window .input-group .input-group-text .btn-white:disabled {
+    background-color: #6499b1;
+    border-color: #fff;
+    color: #005a82;
+  }
+  
+  .search-window {
+    border-radius: 40px;
+    background: #f5f5f7;
+    height: 56px;
+    margin-top: 0px;
+    padding: 0;
+    margin-left: 10px;
+  }
+  
+  .search-window .input-group .form-check-input {
+    margin-top: 0px;
+  }
+  
+  .search-window .input-group .chat_input:focus,
+  .search-window .input-group .chat_input:focus ~ .input-group-text {
+    border-color: #007bff;
+    box-shadow: none;
+  }
+  
+  .search-window .input-group .input-group-text {
+    border-top-left-radius: 0px !important;
+    border-bottom-left-radius: 0px !important;
+    border-left: none;
+  }
+  
+  .chatbtn {
+    border-radius: 50% !important;
+    text-align: center;
+    height: 40px;
+    width: 40px;
+    display: block;
+  }
+  
+  .card-footer {
+    background: none;
+  }
+  
+  .output-body .accordion .accordion-item .accordion-body {
+    max-height: 250px;
+    overflow: scroll;
+  }
+  
+  .card.card-main,
+  .card.card-main .card-header {
+    background-color: #f5f5f7;
+  }
+  
+  .card.card-main .card-header {
+    border-bottom: none;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  
+  .card.card-main .card-body {
+    background-color: #fff;
+    border-radius: 24px;
+  }
+  
+  .card-header .card-adjust-headings {
+    max-width: 50% !important;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  
+  .card-body.overflow-scroll-y {
+    overflow-y: scroll;
+  }
+  
+  .card.split {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .card.full-size {
+    width: 100%;
+    height: 100vh;
+  }
+  
+  .card-header-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 30px;
+  }
+  
+  .placeholder-output-transition {
+    margin-top: 160px;
+    transition: margin-top 0.4s ease;
+  }
+  
+  .inspiration-heading {
+    text-align: center !important;
+    font:
+      500 32px/32px 'Ubuntu',
+      sans-serif;
+    letter-spacing: 1.02px;
+    color: #000000;
+    opacity: 1;
+    width: 325px !important;
+    height: 38px !important;
+    margin-bottom: 16px !important;
+    margin-top: 34px !important;
+  }
+  
+  .output-p {
+    max-width: 496px !important;
+    height: 67px !important;
+    text-align: center !important;
+    font: normal normal normal 22px/31px Ubuntu;
+    letter-spacing: 0.7px;
+    color: #000000;
+    opacity: 1;
+  }
+  
+  .output-lady {
+    width: 202px !important;
+    height: 157px !important;
+  }
+  
+  ::-webkit-scrollbar {
+    width: 5px;
+    /* Thin scrollbar width */
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: #6499b1;
+    /* Scrollbar thumb color */
+    border-radius: 5px;
+    /* Scrollbar thumb border radius */
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: #aaa;
+    /* Scrollbar thumb color on hover */
+  }
+  
+  .card-body .output-body {
+    background-color: #f5f5f7;
+    border-radius: 8px;
+    padding: 10px;
+  }
+  
+  .container-margin-left {
+    margin-left: 35px;
+  }
+  
+  .navbar-dropdown-download {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+  }
+  
+  .dropdown-content-download {
+    animation: dropdownAnimation 0.4s cubic-bezier(0.1, 0.1, 0.1, 0.1) forwards reverse !important;
+    will-change: opacity, transform;
+    transform-origin: top right !important;
+    margin-top: -40px;
+    border-radius: 16px;
+  }
+  
+  @keyframes dropdownAnimation {
+    0% {
+      opacity: 1;
+      transform: scale(1, 1);
+    }
+  
+    25% {
+      opacity: 0.75;
+      transform: scale(0.75, 0.75);
+    }
+  
+    50% {
+      opacity: 0.5;
+      transform: scale(0.5, 0.5);
+    }
+  
+    75% {
+      opacity: 0.25;
+      transform: scale(0.25, 0.25);
+    }
+  
+    100% {
+      opacity: 0;
+      transform: scale(0, 0);
+    }
+  }
+  
+  .dropdown-content-download .link,
+  .dropdown-content-download a,
+  div.skyblue {
+    color: #0070ad;
+    padding: 12px;
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.3s;
+  }
+  
+  .dropdown-content-download a:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .navbar-dropdown-download:hover .dropdown-content-download {
+    display: block;
+  }
+  
+  .navbar-dropdown-download:hover .outside-icon-hover {
+    display: block;
+    opacity: 0;
+  }
+  
+  .navbar-menu-download {
+    display: flex;
+    align-items: center;
+  }
+  
+  @media (max-width: 1400px) {
+    .card.card-main {
+      border: none;
+      margin: 22px 10px 10px 10px !important;
+      height: calc(100vh - 150px) !important;
+    }
+  
+    .container-margin-left {
+      margin-left: 22px;
+    }
+  
+    .card-body {
+      p {
+        font-size: 0.8rem;
+      }
+    }
+  
+    .downloadBox {
+      width: 100%;
+      margin-bottom: 0px !important;
+    }
+  
+    .btn.rotate .material-icons-round {
+      transition: transform 0.3s ease-in-out;
+      transform: rotate(180deg);
+    }
+  }
+  
+  .markdown-container {
+    /* font-family: Arial, sans-serif; */
+    line-height: 1.6;
+  }
+  
+  .markdown-container h1,
+  .markdown-container h2,
+  .markdown-container h3 {
+    color: #2e6c80;
+    margin-bottom: 0.5em;
+  }
+  
+  .markdown-container h6 {
+    color: #007bff;
+  }
+  
+  .markdown-container p {
+    margin-bottom: 1em;
+  }
+  
+  .markdown-container ul,
+  .markdown-container ol {
+    margin-bottom: 1em;
+  }
+  
+  .markdown-container li {
+    margin-bottom: 0.5em;
+  }
+  
+  .markdown-container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1em;
+  }
+  
+  .markdown-container table {
+    padding: 0px !important;
+  }
+  
+  .markdown-container table,
+  .markdown-container th,
+  .markdown-container td {
+    border: 1px solid #ccc;
+    padding: 8px;
+  }
+  
+  .markdown-container th {
+    background-color: #d9ead3;
+  }
+  
+  .markdown-container code {
+    display: block;
+    /* Ensures the code block spans the full width */
+    background-color: #000;
+    /* Black background */
+    color: #fff;
+    /* White text */
+    padding: 1rem;
+    /* Adds padding around the code */
+    border-radius: 5px;
+    /* Optional: adds rounded corners */
+    font-family: 'Courier New', Courier, monospace;
+    /* Monospace font for code */
+    white-space: pre;
+    /* Preserves whitespace and indentation */
+    overflow-x: auto;
+    /* Adds horizontal scrolling if the content overflows */
+    margin-bottom: 1rem;
+    /* Adds spacing between code blocks */
+    font-size: 1rem;
+    position: relative;
+  }
+  
+  .markdown-container pre {
+    background-color: #000;
+    /* Black background for <pre> */
+    color: #fff;
+    /* White text */
+    padding: 1rem;
+    /* Adds padding around the code */
+    border-radius: 5px;
+    /* Optional: adds rounded corners */
+    font-family: 'Courier New', Courier, monospace;
+    /* Monospace font */
+    white-space: pre-wrap;
+    /* Preserves indentation */
+    overflow-x: auto;
+    /* Adds horizontal scrolling for long lines */
+    margin-bottom: 1rem;
+    /* Adds spacing */
+  }
+  
+  .downlaod-img-btn {
+    position: absolute;
+    bottom: 0px;
+    right: 10px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease;
+  }
+  
+  .card-img-container:hover .downlaod-img-btn {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .code-block {
+    position: relative;
+    /* margin: 1em 0; */
+  }
+  
+  .copy-button {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .copy-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .code-block:hover .copy-button {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .modal-body.fixed {
+    overflow-y: auto;
+    /* Allows vertical scrolling */
+    max-height: calc(100vh - 190px) !important;
+    /* Adjust based on header and footer height */
+  }
+  
+  .modal-header,
+  .modal-footer {
+    flex-shrink: 0;
+  }
+  
+  .stepper-output-lady .card,
+  .stepper-output-lady .card-main {
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+  
+  .disable-form-group {
+    margin-bottom: 0 !important;
+    padding: 0 !important;
+  }
+  

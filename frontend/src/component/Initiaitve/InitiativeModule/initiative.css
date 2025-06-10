@@ -1,0 +1,370 @@
+.custom-label {
+    font-weight: 600;
+    color: #000;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 16px; /* Increased font size */
+    margin-bottom: 15px;
+  }
+  
+  .highlighted {
+    border: 2px solid red; /* Highlighting border */
+  }
+  
+  .border-highlight {
+    border-color: red; /* Change border color */
+  }
+  
+  .inputElementbgc {
+    background-color: #f5f5f7;
+  }
+  .inputElementfont {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 12px;
+  }
+  .increment-button {
+    border: none;
+    border-radius: 5px;
+    width: 70px;
+  }
+  .noPadding {
+    margin-bottom: 0 !important;
+    margin-top: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  .box-length {
+    height: 60px;
+  }
+  .moduleHeading {
+    text-align: left;
+    font: normal normal normal 14px/24px Verdana;
+    letter-spacing: 0px;
+    color: #000000;
+    opacity: 1;
+  }
+  .increment-decrement-container {
+    text-align: center;
+    margin: 3px;
+  }
+  .small-circle {
+    width: 18px; /* Adjust as needed */
+    height: 18px; /* Adjust as needed */
+    padding: 0; /* Remove padding to ensure the button stays round */
+    border-radius: 50%; /* Ensure the button is perfectly round */
+    display: flex; /* Center the icon/text */
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+    font-size: 1rem; /* Adjust font size if necessary */
+    background: #679cb4;
+    opacity: 1;
+  }
+  .increment-button {
+    width: 38px;
+    text-align: center;
+    border-radius: 1px;
+    margin: 1px;
+    font-size: 14px;
+  }
+  .preview-inputform {
+    width: 100px;
+  }
+  
+  .increment-button:focus {
+    outline: none; /* Remove outline */
+    box-shadow: none; /* Remove default box shadow */
+    border: none; /* Ensure no border appears on focus */
+  }
+  .text-box-spacing {
+    margin-bottom: 10px; /* Adjust this value as needed */
+  }
+  
+  .item {
+    border-bottom: 8px solid #fefefe; /* Optional border for separation */
+    box-shadow: 0 2px 4px #fefefe;
+    border-radius: 18px;
+  }
+  
+  .header {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 18px;
+  }
+  
+  .content {
+    padding: 10px;
+    /* background-color: #F5F5F7;  */
+    border: none;
+    border-radius: 18px;
+  }
+  
+  .prompt-arrow-up-icon {
+    width: 25px;
+    height: 23px;
+    background-color: #f5f5f7;
+    margin: 3px;
+  }
+  .dynamic-expand-collapse {
+    border: none;
+    border-radius: 18px;
+    overflow: hidden;
+    margin: 16px;
+    transition: all 0.3s ease;
+    width: auto;
+    background-color: #f5f5f7;
+  }
+  
+  .byouc-bg-color {
+    background-color: #f5f5f7 !important;
+  }
+  .byouc-rounded-corners {
+    border-radius: 20px !important;
+    font-size: 14px;
+    height: 35px;
+  }
+  
+  .d-flex:hover .material-icons {
+    color: hsl(199, 97%, 26%) !important;
+  }
+  .unselected-button {
+    background-color: #dfedf5 !important;
+  }
+  .selected-button {
+    background-color: #679cb4 !important;
+    color: #ffffff !important;
+  }
+  .hover-effect-model:hover {
+    background-color: #025a82 !important;
+  }
+  
+  .hover-effect-model:hover label {
+    color: #ffffff !important;
+  }
+  
+  .custom-scrollbar-byouc {
+    scrollbar-gutter: stable;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  .custom-scrollbar-byouc::-webkit-scrollbar-track {
+    background-color: #f9f9f9;
+    border-radius: 6px !important;
+  }
+  
+  .custom-scrollbar-byouc::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  .custom-scrollbar-byouc::-webkit-scrollbar-thumb {
+    background-color: #679cb4 !important;
+    color: #679cb4 !important;
+    border-radius: 6px;
+  }
+  .bgwhiteToggle {
+    background-color: #fff !important;
+    width: 150px !important;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 12px;
+  }
+  .managed-toggle-option {
+    width: 70px;
+    height: 40px;
+    background: #f9f9f9;
+    color: #000;
+    border: none;
+    border-radius: 32px;
+    font-size: 12px;
+    cursor: pointer;
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 0;
+    font-family: 'Ubuntu', sans-serif;
+    display: flex;
+    align-items: center;
+  }
+  .bgmanaged {
+    background-color: #fff !important;
+  }
+  .byouc-bg-color {
+    background-color: #f5f5f7 !important;
+  }
+  .bg-icon-dropdown {
+    background-color: #025a82 !important;
+  }
+  .bg-step-button-inactive {
+    background-color: #f9f9f9 !important;
+  }
+  .step-button-text {
+    color: #535353 !important;
+  }
+  .bg-step-button-next {
+    background-color: #6499b1 !important;
+  }
+  .bg-icon-dropdown-hover {
+    background-color: #f9f9f9 !important;
+  }
+  .bg-icon-dropdown-hover:hover {
+    background-color: #025a82 !important;
+    color: #ffffff !important;
+  }
+  .d-flex:hover .material-icons {
+    color: #025a82 !important;
+  }
+  .unselected-button {
+    background-color: #dfedf5 !important;
+  }
+  .selected-button {
+    background-color: #679cb4 !important;
+    color: #ffffff !important;
+  }
+  .hover-effect-model:hover {
+    background-color: #025a82 !important;
+  }
+  
+  .hover-effect-model:hover label {
+    color: #ffffff !important;
+  }
+  
+  .custom-scrollbar-byouc {
+    scrollbar-gutter: stable;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  .custom-scrollbar-byouc::-webkit-scrollbar-track {
+    background-color: #f9f9f9;
+    border-radius: 6px !important;
+  }
+  
+  .custom-scrollbar-byouc::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .custom-scrollbar-byouc::-webkit-scrollbar-thumb {
+    background-color: #679cb4 !important;
+    color: #679cb4 !important;
+    border-radius: 6px;
+  }
+  .bg-marketplace-custom {
+    background-image: url('../../../../public/marketPlaceBG1.svg');
+    background-size: cover;
+    background-position: center;
+  }
+  .bg-marketplace-custom-Read-More {
+    background-image: url('../../../../public/marketPlaceBG2.svg');
+    background-size: 20%;
+    background-position: left bottom;
+    background-repeat: no-repeat;
+    background-color: #2b0a3d;
+  }
+  .octagon-bg {
+    height: 40px;
+    width: 40px;
+    background-color: white;
+    clip-path: polygon(25% 0%, 75% 0%, 100% 25%, 100% 75%, 75% 100%, 25% 100%, 0% 75%, 0% 25%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+  }
+  .byouc-inputcard {
+    border-radius: 20px !important;
+    font-size: 14px;
+  }
+  
+  .progress-bar-container {
+    width: 100%;
+    height: 14px;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+  .progress-bar-container2 .progress-bar {
+    height: 100%;
+    animation: fillProgress 2s forwards;
+    border-radius: 8px;
+    background-color: #dadada !important;
+  }
+  .progress-bar.In.Progress,
+  .progress-bar.Pending {
+    background-color: #b3dbf0 !important;
+  }
+  .progress-bar-container .progress-bar {
+    height: 100%;
+    background-color: #dadada !important;
+    animation: fillProgress 2s forwards;
+    border-radius: 8px;
+  }
+  .progress-bar-network.network,
+  .progress-bar-network.database,
+  .progress-bar-network.storage {
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      rgba(255, 253, 253, 1) 0%,
+      rgba(115, 164, 186, 1) 39%,
+      rgba(0, 90, 130, 1) 100%
+    );
+    background-color: #dadada !important;
+    animation: fillProgress 2s forwards;
+    border-radius: 8px;
+  }
+  .progress-bar-gradient.network {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 253, 253, 1) 0%,
+      rgba(115, 164, 186, 1) 39%,
+      rgba(0, 90, 130, 1) 100%
+    ) !important;
+  }
+  
+  .progress-bar-network.completed.success.network,
+  .progress-bar-network.completed.success.database,
+  .progress-bar-network.completed.success.storage {
+    background-color: #005a82 !important;
+    background: #005a82 !important;
+  }
+  
+  .progress-bar.completed {
+    background-color: #005a82 !important;
+    background: none;
+    animation: fillProgress 0.1s forwards;
+  }
+  
+  .progress-bar.failed {
+    background-color: #cc2026;
+  }
+  .progress-bar.primary {
+    background-color: #005a82;
+  }
+  .progress-bar.success {
+    background-color: #005a82 !important;
+    /* transition: fillProgress 2s ease; */
+  }
+  
+  @keyframes fillProgress {
+    from {
+      width: 0%;
+    }
+    to {
+      width: 100%;
+    }
+  }
+  
+  /* Submit button hover effect */
+  .submit-button-hover {
+    background-color: #f9f9f9 !important;
+    color: #000 !important;
+    transition: all 0.3s ease !important;
+  }
+  
+  .submit-button-hover:hover {
+    background-color: #005a82 !important;
+    color: #fff !important;
+  }
+  

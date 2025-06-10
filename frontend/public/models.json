@@ -1,0 +1,62 @@
+[
+  {
+    "id": "67cec46954bff0c020c4bf9d",
+    "name": "gpt-4o",
+    "provider": "AZURE",
+    "label": "Azure OpenAI GPT-4o",
+    "unit_token_size": 1000,
+    "unit_token_cost_currency": "USD",
+    "unit_token_cost": 0.015,
+    "created_on": "2025-03-10T16:22:25"
+  },
+  {
+    "id": "67cec46954bff0c020c4bf9e",
+    "name": "o1-mini",
+    "provider": "AZURE",
+    "label": "Azure OpenAI GPT-o1 Mini",
+    "unit_token_size": 1000,
+    "unit_token_cost_currency": "USD",
+    "unit_token_cost": 0.012,
+    "created_on": "2025-03-10T16:22:25"
+  },
+  {
+    "id": "67cec46954bff0c020c4bf9f",
+    "name": "o1",
+    "provider": "AZURE",
+    "label": "Azure OpenAI GPT-o1",
+    "unit_token_size": 1000,
+    "unit_token_cost_currency": "USD",
+    "unit_token_cost": 0.015,
+    "created_on": "2025-03-10T16:22:25"
+  },
+  {
+    "id": "67cec46954bff0c020c4bfa0",
+    "name": "anthropic.claude-3-5-sonnet-20240620-v1:0",
+    "provider": "AWS",
+    "label": "AWS Anthropic Claude 3.5 Sonnet",
+    "unit_token_size": 1000,
+    "unit_token_cost_currency": "USD",
+    "unit_token_cost": 0.015,
+    "created_on": "2025-03-10T16:22:25"
+  },
+  {
+    "id": "67cec46954bff0c020c4bfa1",
+    "name": "anthropic.claude-3-sonnet-20240229-v1:0",
+    "provider": "AWS",
+    "label": "AWS Anthropic Claude 3 Sonnet",
+    "unit_token_size": 1000,
+    "unit_token_cost_currency": "USD",
+    "unit_token_cost": 0.015,
+    "created_on": "2025-03-10T16:22:25"
+  },
+  {
+    "id": "67cec46954bff0c020c4bfa2",
+    "name": "anthropic.claude-3-haiku-20240307-v1:0",
+    "provider": "AWS",
+    "label": "AWS Anthropic Claude 3 Haiku",
+    "unit_token_size": 1000,
+    "unit_token_cost_currency": "USD",
+    "unit_token_cost": 0.00125,
+    "created_on": "2025-03-10T16:22:25"
+  }
+]

@@ -1,0 +1,70 @@
+[
+  {
+    "label": "Admin",
+    "icon": "material-icons-round",
+    "iconName": "verified_user",
+    "adminOnly": true,
+    "submenu": [
+      {
+        "label": "Wizard",
+        "iconName": "verified_user",
+        "is_enabled": true,
+        "default_model_id": null,
+        "scenario_id": null,
+        "submenu": [
+          {
+            "label": "Gen AI Initiatives",
+            "is_enabled": true,
+            "default_model_id": null,
+            "scenario_id": null,
+            "submenu": [
+              {
+                "label": "Create Initiative",
+                "is_enabled": true,
+                "path": "/create-initiative-wizard",
+                "default_model_id": null,
+                "scenario_id": 103
+              },
+              {
+                "label": "Multiagent Initiative",
+                "is_enabled": true,
+                "path": "/upload-initiative-json",
+                "default_model_id": 120,
+                "scenario_id": 120
+              },
+              {
+                "label": "Interact",
+                "is_enabled": true,
+                "path": "/initiative/interact",
+                "default_model_id": null,
+                "scenario_id": 104
+              },
+              {
+                "label": "List & Manage",
+                "is_enabled": true,
+                "path": "/initiative/initiativeManagement",
+                "default_model_id": null,
+                "scenario_id": 104
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "Accounts",
+        "path": "/admin/account",
+        "icon": "fa-solid fa-tachometer-alt"
+      },
+      {
+        "label": "Project",
+        "path": "/admin/project",
+        "icon": "fa-solid fa-users"
+      },
+      {
+        "label": "Users",
+        "path": "/admin/users",
+        "icon": "fa-solid fa-users"
+      }
+    ]
+  }
+]
