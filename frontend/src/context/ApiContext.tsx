@@ -26,7 +26,12 @@ interface ApiContextProps {
   setSelectedAgent: Dispatch<SetStateAction< any>>;
   selectedInitiative: any;
   setSelectedInitiative: Dispatch<SetStateAction< any>>;
- 
+  runInitiative: boolean;
+  setRunInitiative: Dispatch<SetStateAction<boolean>>;
+  runTravel: boolean;
+  setRunTravel: Dispatch<SetStateAction<boolean>>;
+  runManufacturing: boolean;
+  setRunManufacturing: Dispatch<SetStateAction<boolean>>; 
 }
 
 export const ApiContext = createContext<ApiContextProps | null>(null);
@@ -45,6 +50,9 @@ export const ApiProvider = ({ children }: { children: React.ReactNode }) => {
   const [selectedInitiative, setSelectedInitiative] = useState<Initiative | null>(null);
   const [selectedAgent, setSelectedAgent] = useState<Agent | null>(null);
 
+  const [runInitiative, setRunInitiative] = useState<boolean>(false);
+  const [runTravel, setRunTravel] = useState<boolean>(false);
+  const [runManufacturing, setRunManufacturing] = useState< boolean>(false);
 
   const updateSubTitle = (title: string) => {
     setSubTitle(title);
@@ -78,6 +86,9 @@ export const ApiProvider = ({ children }: { children: React.ReactNode }) => {
     setStartOver(over);
   };
 
+  console.log('Selected runTravel:', runTravel);
+
+
   const contextValue: ApiContextProps = {
     loading,
     setLoading,
@@ -101,7 +112,13 @@ export const ApiProvider = ({ children }: { children: React.ReactNode }) => {
     selectedAgent,
     setSelectedAgent,
     selectedInitiative,
-    setSelectedInitiative
+    setSelectedInitiative,
+    runInitiative,
+    setRunInitiative,
+    runTravel,
+    setRunTravel,
+    runManufacturing,
+    setRunManufacturing
   };
 
   return <ApiContext.Provider value={contextValue}>{children}</ApiContext.Provider>;

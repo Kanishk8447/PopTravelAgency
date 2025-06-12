@@ -1,18 +1,51 @@
 import React, { useState, useEffect, use } from 'react';
 import './header.css';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useApi } from '../context/ApiContext';
 
 const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { 
+    setRunInitiative,
+    setRunTravel,
+    setRunManufacturing
+   } =
+    useApi();
 
+    // Use useEffect to check local storage on component mount
+  useEffect(() => {
+    const runTravel = localStorage.getItem('RunTravel') === 'true';
+    const runManufacturing = localStorage.getItem('RunManufacturing') === 'true';
+    const runInitiative = localStorage.getItem('RunInitiative') === 'true';
+
+    setRunTravel(runTravel);
+    setRunManufacturing(runManufacturing);
+    setRunInitiative(runInitiative);
+  }, [setRunTravel, setRunManufacturing, setRunInitiative]);
   const handleTravel = () => {
-    navigate('/travel');
+    navigate('/travel-agency');
+    setRunTravel(true);
+    setRunManufacturing(false);
+    setRunInitiative(false);
+
+    // Store state in local storage
+    localStorage.setItem('RunTravel', 'true');
+    localStorage.setItem('RunManufacturing', 'false');
+    localStorage.setItem('RunInitiative', 'false');
   };
 
   const handleManufacturing = () => {
-    navigate('/manufacturing');
-  }
+    navigate('/manufacturing-agency');
+    setRunTravel(false);
+    setRunManufacturing(true);
+    setRunInitiative(false);
+
+    // Store state in local storage
+    localStorage.setItem('RunTravel', 'false');
+    localStorage.setItem('RunManufacturing', 'true');
+    localStorage.setItem('RunInitiative', 'false');
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -21,6 +54,9 @@ const Header = () => {
   const handleLogout = () => {
   localStorage.removeItem('isAuthenticated');
   localStorage.removeItem('userEmail');
+  localStorage.removeItem('runTravel');
+  localStorage.removeItem('runManufacturing');
+  localStorage.removeItem('runInitiative');
   navigate('/login');
 };
 

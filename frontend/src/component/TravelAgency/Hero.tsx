@@ -713,7 +713,7 @@ export default function Hero() {
           </div>
         </div>
       </Section>
-      <div>
+      {/*<div>
         <div className="d-flex justify-content-center m-3">
           {data && (
             <button
@@ -727,7 +727,7 @@ export default function Hero() {
           )}
         </div>
 
-        <div
+         <div
           className="modal fade custom-modal-class high-zindex-blur-background"
           id="customModal"
           tabIndex={-1}
@@ -755,13 +755,13 @@ export default function Hero() {
                   <div className="form-container overflow-auto">
                     <form>
                       <div className="form-group ">
-                        {/* <DynamicInputComponent
-                          type="text"
-                          label="Select Hotel"
-                          name="hotel"
-                          value={hotel}
-                          onTextChange={(e) => sethotel(e.target.value)}
-                        /> */}
+                        //  <DynamicInputComponent
+                        //   type="text"
+                        //   label="Select Hotel"
+                        //   name="hotel"
+                        //   value={hotel}
+                        //   onTextChange={(e) => sethotel(e.target.value)}
+                        // /> 
                         <DynamicSelectBox
                           label="Select Hotel"
                           name="hotel"
@@ -828,12 +828,12 @@ export default function Hero() {
                                 {hotel.hotelCancellationPolicy}
                               </span>
                             </div>
-                            {/* <a
-                            href={hotel.hotelBookingLink}
-                            target="_blank"
-                            rel="noopener noreferrer">
-                            Book Now
-                          </a> */}
+                          //    <a
+                          //   href={hotel.hotelBookingLink}
+                          //   target="_blank"
+                          //   rel="noopener noreferrer">
+                          //   Book Now
+                          // </a> 
                           </div>
                         </div>
                       )}
@@ -859,26 +859,26 @@ export default function Hero() {
                           />
                         </div>
                       </div>
-                      {/* <div className="row">
-                        <div className="form-group col-md-6">
-                          <DynamicInputComponent
-                            type="time"
-                            label="Check-in Time : "
-                            name="checkInTime"
-                            value={checkInTime}
-                            onTextChange={(e) => setCheckInTime(e.target.value)}
-                          />
-                        </div>
-                        <div className="form-group  col-md-6">
-                          <DynamicInputComponent
-                            type="time"
-                            label="Check-out Time : "
-                            name="checkOutTime"
-                            value={checkOutTime}
-                            onTextChange={(e) => setCheckOutTime(e.target.value)}
-                          />
-                        </div>
-                      </div> */}
+                      //  <div className="row">
+                      //   <div className="form-group col-md-6">
+                      //     <DynamicInputComponent
+                      //       type="time"
+                      //       label="Check-in Time : "
+                      //       name="checkInTime"
+                      //       value={checkInTime}
+                      //       onTextChange={(e) => setCheckInTime(e.target.value)}
+                      //     />
+                      //   </div>
+                      //   <div className="form-group  col-md-6">
+                      //     <DynamicInputComponent
+                      //       type="time"
+                      //       label="Check-out Time : "
+                      //       name="checkOutTime"
+                      //       value={checkOutTime}
+                      //       onTextChange={(e) => setCheckOutTime(e.target.value)}
+                      //     />
+                      //   </div>
+                      // </div> 
                       <button
                         type="button"
                         onClick={(e) => {
@@ -894,8 +894,8 @@ export default function Hero() {
               </div>
             </div>
           </div>
-        </div>
-      </div>
+        </div> 
+      </div>*/}
 
       {data && <Recommend data={data} />}
     </>

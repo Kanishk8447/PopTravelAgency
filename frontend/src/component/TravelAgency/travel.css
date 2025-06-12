@@ -121,3 +121,23 @@ form button:hover {
   display: block;
   margin: 0 auto; /* Centers the image */
 }
+
+
+.travel-run-container {
+  /* display: flex; */
+  /* height: 100%; */
+  /* background-image: url('./assets/blog1.jpg'); */
+  background-image: url('../TravelAgency/assets/hero.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 40px;
+}
+
+.manufacturing-run-container{
+  background-image: url('../../../public/manufacturing_image.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 40px;
+}

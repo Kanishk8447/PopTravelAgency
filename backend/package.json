@@ -12,6 +12,9 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@azure/cognitiveservices-qnamaker-runtime": "^1.0.1",
+    "@azure/identity": "^4.10.0",
+    "@azure/ms-rest-azure-js": "^2.1.0",
     "cors": "^2.8.5",
     "express": "^5.1.0",
     "fs": "^0.0.1-security",
