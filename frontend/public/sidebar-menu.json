@@ -17,7 +17,7 @@
               {
                 "label": "Interact",
                 "is_enabled": true,
-                "path": "/initiative/interact",
+                "path": "/run-initiative",
                 "default_model_id": null,
                 "scenario_id": 104
               },

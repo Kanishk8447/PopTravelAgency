@@ -39,7 +39,10 @@
     "vite": "^6.3.5"
   },
   "dependencies": {
+    "aws-sdk": "^2.1692.0",
     "react-bootstrap": "^2.10.10",
-    "react-oidc-context": "^3.3.0"
+    "react-dropzone": "^14.3.8",
+    "react-oidc-context": "^3.3.0",
+    "react-syntax-highlighter": "^15.6.1"
   }
 }

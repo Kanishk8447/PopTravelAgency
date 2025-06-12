@@ -12,6 +12,8 @@ import AgentDetails from '../component/Initiaitve/ListInitiative/AgentDetails';
 import LoginPage from '../../auth/LoginPage';
 import ProtectedRoute from './ProtectedRoute';
 import RedirectIfAuthenticated from './RedirectIfAuthenticated';
+import RunInitiative from '../component/Interact/RunInitiative';
+import { RunInitiativeSource } from '../component/Interact/RunInitiativeSourceEnum';
 
 const router = createBrowserRouter([
  
@@ -33,12 +35,18 @@ const router = createBrowserRouter([
     children: [
       
       { path: '/travel', element: React.createElement(Hero) },
+      { path: 'run-initiative', element: React.createElement(RunInitiative, {
+                source: RunInitiativeSource.Native,
+                isExpanded: false,
+                interactHeight: false
+              })},
       {
         path: 'initiative/initiativeManagement',
         element: React.createElement(InitiativeManagement),
         children: [
           { path: 'initiative-details/:initiativeId', element: React.createElement(InitiativeDetails) },
-          { path: 'initiative-details/:initiaitveId/:id', element: React.createElement(AgentDetails) }
+          { path: 'initiative-details/:initiaitveId/:id', element: React.createElement(AgentDetails) },
+          
         ]
       }
     ]

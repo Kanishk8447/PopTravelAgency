@@ -160,5 +160,95 @@
     "files": [],
     "created_on": "2025-06-11T06:28:33.713Z",
     "modified_on": "2025-06-11T06:28:33.713Z"
+  },
+  {
+    "id": "08eed66f-2d9c-4d74-93d7-0243644dddcd",
+    "type": "Agent",
+    "cloud": "AZURE",
+    "name": "Medical",
+    "multiagent_pattern": "Sequential",
+    "is_multiagent": false,
+    "termination_condition": "DONE",
+    "max_messages": 5,
+    "guardrails": [],
+    "Agents": [
+      {
+        "is_supervisor": false,
+        "agent_name": "Medical",
+        "agent_description": "Medical",
+        "agent_character": "MedicalMedicalMedicalMedicalMedicalMedicalMedicalMedicalMedicalMedicalMedicalMedicalMedicalMedicalMedicalMedicalMedicalMedicalMedical",
+        "tools": [],
+        "model": "gpt-4o",
+        "memory": false,
+        "guardrail": false,
+        "web_scrape": false,
+        "agent_id": "25bc2aeb-3c2f-4b5c-abef-fcea9ab71ebf"
+      }
+    ],
+    "llms": {
+      "name": "gpt-4o",
+      "provider": "AZURE"
+    },
+    "tags": [
+      {
+        "key": "cotton",
+        "value": "true"
+      },
+      {
+        "key": "account_id"
+      },
+      {
+        "key": "project_id"
+      }
+    ],
+    "tools": [],
+    "files": [],
+    "created_on": "2025-06-12T08:22:59.517Z",
+    "modified_on": "2025-06-12T08:22:59.517Z"
+  },
+  {
+    "id": "5f36e158-b919-4f67-a035-03822148f902",
+    "type": "Agent",
+    "cloud": "AZURE",
+    "name": "Medical",
+    "multiagent_pattern": "Sequential",
+    "is_multiagent": false,
+    "termination_condition": "DONE",
+    "max_messages": 5,
+    "guardrails": [],
+    "Agents": [
+      {
+        "is_supervisor": false,
+        "agent_name": "Medical",
+        "agent_description": "Medical",
+        "agent_character": "MedicalMedicalMedicalMedicalMedicalMedicalMedicalMedicalMedicalMedicalMedicalMedicalMedicalMedicalMedicalMedicalMedicalMedicalMedical",
+        "tools": [],
+        "model": "gpt-4o",
+        "memory": false,
+        "guardrail": false,
+        "web_scrape": false,
+        "agent_id": "6c6d24bd-9bb2-4cd3-b348-e69be750a0d9"
+      }
+    ],
+    "llms": {
+      "name": "gpt-4o",
+      "provider": "AZURE"
+    },
+    "tags": [
+      {
+        "key": "cotton",
+        "value": "true"
+      },
+      {
+        "key": "account_id"
+      },
+      {
+        "key": "project_id"
+      }
+    ],
+    "tools": [],
+    "files": [],
+    "created_on": "2025-06-12T08:23:07.481Z",
+    "modified_on": "2025-06-12T08:23:07.481Z"
   }
 ]

@@ -1,0 +1,1080 @@
+/* file-preview.css */
+
+.file-preview-container {
+  margin-top: 10px;
+  margin-left: 10px;
+  max-width: 100%;
+  /* height : 80px;  */
+  position: relative;
+  flex-wrap: wrap; /* Wrap the previews to the next line if they overflow */
+  gap: 10px;
+}
+
+.file-info {
+  display: inline-block;
+  vertical-align: middle;
+  max-width: 100%;
+  word-wrap: break-word;
+}
+
+.file-preview {
+  display: inline-block;
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+  font-size: 14px;
+  position: relative;
+  width: fit-content; /* add this */
+  height: fit-content; /* add this */
+}
+
+.file-preview.image-preview {
+  overflow: hidden; /* hide any overflow */
+  border-radius: 5px;
+}
+
+.file-preview.image-preview img {
+  width: 135px;
+  height: 90px; /* set a maximum height */
+  object-fit: cover;
+  border-radius: 5px;
+}
+.file-preview.non-image-preview {
+  display: inline-flex; /* make it an inline-flex element */
+  flex-direction: column; /* make the elements stack vertically */
+  align-items: center; /* center the elements horizontally */
+  padding: 10px; /* add some padding to make it look like a rectangle */
+  border-radius: 5px; /* add a border radius to make it look like a rectangle */
+  width: fit-content; /* make the width fit the content */
+}
+
+.file-preview.non-image-preview .file-info {
+  text-align: center; /* center the text horizontally */
+  display: flex; /* make it a flex container */
+  flex-wrap: wrap; /* allow the filename and extension to wrap to a new line */
+}
+
+.file-preview.non-image-preview .file-name {
+  white-space: nowrap; /* prevent the filename from wrapping to a new line */
+  overflow: hidden; /* hide the overflow */
+  text-overflow: ellipsis; /* add an ellipsis to the end of the filename if it's too long */
+  margin-right: 5px; /* add some space between the filename and extension */
+}
+
+.file-preview.non-image-preview .file-extension {
+  font-size: 0.8em; /* make the extension text smaller */
+  color: #666; /* make the extension text gray */
+}
+.file-preview .icon-svg {
+  width: 24px;
+  height: 24px;
+  background-color: #ff5588;
+  /* display: inline-block;
+  vertical-align: middle; */
+}
+
+.file-name {
+  font-weight: bold;
+  width: 100%;
+  color: #000;
+  display: block; /* make the file name a block element */
+  margin-top: 5px; /* add some margin top to the file name */
+}
+
+.file-extension {
+  font-size: 12px;
+  color: #333;
+  display: block; /* make the file extension a block element */
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+/* .overlay:hover {
+  opacity: 1;
+} */
+
+.overlay span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 14px;
+  color: #fff;
+}
+
+.cross-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(50%, -50%);
+  border-radius: 50%; /* add this to make the button circular */
+  padding: 2px;
+  z-index: 1;
+  background-color: #ccc;
+  border: none;
+  box-shadow: 0 0 0 1px #ccc;
+  width: 15px; /* set a fixed width and height to make it circular */
+  height: 15px;
+}
+
+.cross-button i {
+  font-size: 10px;
+  color: #000;
+  position: absolute; /* position the icon absolutely */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* center the icon */
+}
+
+.file-preview.image-preview.has-cross-button {
+  overflow: visible;
+}
+
+/* Tooltip Styles */
+.tooltip.show {
+  opacity: 1 !important; /* Ensure the tooltip is fully opaque */
+}
+
+/* Change the tooltip's background color */
+.tooltip-inner {
+  background-color: #ffffff !important; /* Set background to white */
+  color: #000000 !important; /* Set text color to black for readability */
+  border: 1px solid #005a82 !important; /* Dark blue border */
+}
+
+/* Change the tooltip arrow color */
+.tooltip-arrow::before {
+  border-top-color: #005a82 !important;
+  border-width: 0 0.5rem 0.5rem 0.5rem; /* Arrow color to match the white background */
+}
+
+/* Optional: Add box-shadow for better visibility */
+.tooltip-inner {
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Tooltip Styles */
+.tooltip.show {
+  opacity: 1 !important; /* Ensure the tooltip is fully opaque */
+}
+
+/* Change the tooltip's background color */
+.tooltip-inner {
+  background-color: #ffffff !important; /* Set background to white */
+  color: #000000 !important; /* Set text color to black for readability */
+  border: 1px solid #005a82 !important; /* Dark blue border */
+}
+
+/* Change the tooltip arrow color */
+.tooltip-arrow::before {
+  border-top-color: #005a82 !important;
+  border-width: 0 0.5rem 0.5rem 0.5rem; /* Arrow color to match the white background */
+}
+
+/* Optional: Add box-shadow for better visibility */
+.tooltip-inner {
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Tooltip Styles */
+.tooltip.show {
+  opacity: 1 !important; /* Ensure the tooltip is fully opaque */
+}
+
+/* Change the tooltip's background color */
+.tooltip-inner {
+  background-color: #ffffff !important; /* Set background to white */
+  color: #000000 !important; /* Set text color to black for readability */
+  border: 1px solid #005a82 !important; /* Dark blue border */
+}
+
+/* Change the tooltip arrow color */
+.tooltip-arrow::before {
+  border-top-color: #005a82 !important;
+  border-width: 0 0.5rem 0.5rem 0.5rem; /* Arrow color to match the white background */
+}
+
+/* Optional: Add box-shadow for better visibility */
+.tooltip-inner {
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.toggle-rag {
+  border-radius: 99px;
+  width: 72px;
+  height: 32px;
+  transition:
+    background-color 0.4s ease,
+    border-color 0.1s ease;
+  cursor: pointer;
+  position: relative;
+  box-shadow: inset 0px 3px 6px #00000029;
+}
+
+.text-color {
+  color: #7a7a7a;
+}
+
+.toggle-rag .thumb {
+  height: 24px;
+  width: 24px;
+  border-radius: 99px;
+  transform: translateX(0);
+  transition:
+    left 0.4s ease,
+    background-color 0.4s ease,
+    opacity 0.4s ease;
+  position: absolute;
+  left: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 1;
+  z-index: 1;
+}
+
+.toggle-rag.toggled .thumb {
+  left: calc(100% - 40%);
+  opacity: 1;
+  color: white;
+}
+
+.toggle-rag .text {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 10px;
+  height: 100%;
+  align-items: center;
+}
+
+.toggle-rag.toggled .user-text-color {
+  color: white;
+}
+
+.toggle-rag .toggle-text {
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease;
+  position: absolute;
+  left: 10px;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.toggle-rag .toggle-text.hidden {
+  opacity: 0;
+  transform: translateX(-10px);
+}
+
+.toggle-rag .toggle-text.on {
+  left: 26px;
+}
+
+.toggle-rag .toggle-text.off {
+  right: 22px;
+  left: auto;
+}
+
+.toggle-rag.toggled .toggle-text.on {
+  opacity: 0;
+  transform: translateX(-10px);
+}
+
+.toggle-rag.toggled .toggle-text.off {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.generic-chat-title {
+  max-width: 580px;
+  text-align: left;
+  font: normal normal normal 18px/24px Ubuntu;
+  letter-spacing: 0px;
+  color: #2c2c2c;
+  opacity: 1;
+}
+
+.knowledge-configurator {
+  text-align: left;
+  font: normal normal normal 20px/24px Verdana;
+  letter-spacing: 0px;
+  color: #025a82;
+  opacity: 1;
+}
+
+.Enable-knowledge {
+  text-align: left;
+  font: normal normal bold 14px/17px Verdana;
+  letter-spacing: 0px;
+  color: #000000;
+  opacity: 1;
+}
+
+.rag-doc-box {
+  width: 381px;
+  height: 150px;
+  background: #f5f5f7 0% 0% no-repeat padding-box;
+  border-radius: 6px;
+  opacity: 1;
+}
+
+.account-name {
+  text-align: left;
+  font: normal normal normal 18px/20px Verdana;
+  letter-spacing: 0px;
+  color: #000000;
+  opacity: 1;
+}
+
+.file-name-rag {
+  text-align: left;
+  font: normal normal normal 16px/20px Verdana;
+  letter-spacing: 0px;
+  color: #000000;
+  opacity: 1;
+  margin-top: 26px;
+  max-width: 300px;
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out; /* Adjust duration and easing as needed */
+  opacity: 1;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.context-keys {
+  width: 157px;
+  height: 40px;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  border-radius: 20px;
+  opacity: 1;
+}
+
+.context-keys-text {
+  text-align: left;
+  font: normal normal normal 16px/20px Verdana;
+  letter-spacing: 0px;
+  color: #000000;
+  opacity: 1;
+}
+
+.upload-box {
+  width: 370px;
+  height: 64px;
+  background: #f5f5f7 0% 0% no-repeat padding-box;
+  border: 1px dashed #e0e0e0;
+  border-radius: 9px;
+  opacity: 1;
+}
+
+.upload-knowledge-text {
+  text-align: left;
+  font: normal normal bold 14px/17px Verdana !important;
+  letter-spacing: 0px;
+  color: #000000;
+  opacity: 1;
+}
+
+.search-box {
+  width: 626px;
+  height: 66px;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  border: 1px solid #707070;
+  border-radius: 33px;
+  opacity: 1;
+  padding-left: 27px;
+}
+
+.bg-box {
+  background: #f5f5f7 0% 0% no-repeat padding-box;
+  border-radius: 6px;
+  opacity: 1;
+}
+
+.border-box {
+  background: #ffffff 0% 0% no-repeat padding-box;
+  border: 1px solid #015a82;
+  border-radius: 6px;
+  opacity: 1;
+}
+
+@keyframes smoothFadeSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.chat-input-animation {
+  animation: smoothFadeSlideIn 0.4s ease-in-out both;
+}
+
+.copy-icon-cs {
+  color: #fff;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1;
+  transition:
+    transform 0.3s ease-in-out,
+    opacity 0.3s ease-in-out;
+}
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  backdrop-filter: blur(5px);
+}
+
+.popup-box {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  max-width: 450px;
+  width: 90%;
+  animation: fadeInRag 0.3s ease-out;
+  position: relative;
+}
+
+@keyframes fadeInRag {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.context-key-text {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.text-area-popup {
+  width: 100%;
+  height: 120px;
+  margin-bottom: 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 14px;
+  resize: vertical;
+  transition: border-color 0.3s ease;
+}
+
+.text-area-popup:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.rag-spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid rgba(0, 90, 130, 0.3);
+  border-top: 3px solid rgba(0, 90, 130, 1);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.context-key-text {
+  text-align: left;
+  font: normal normal bold 20px/20px Ubuntu;
+  letter-spacing: 0px;
+  color: #000000;
+  opacity: 1;
+}
+
+.close-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #005a82;
+  margin-right: 10px;
+  margin-top: 15px;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #fff;
+  padding: 0;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+}
+
+.close-button:hover {
+  background-color: #005a82;
+}
+
+.prompt-chain-panel {
+  position: absolute;
+  left: 0;
+  top: 140px;
+  width: 150px;
+  background-color: #f8f9fa;
+  padding: 16px;
+  overflow-y: auto;
+  z-index: 900;
+}
+
+.prompt-chain-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.prompt-chain-item {
+  background-color: #ffffff;
+  color: #333;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  position: relative;
+}
+
+.prompt-chain-item.selected {
+  background-color: #005a82;
+  color: #ffffff;
+}
+
+.prompt-chain-item .prompt-title {
+  font-weight: bold;
+}
+
+.prompt-chain-item .more-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  color: #666;
+}
+
+.prompt-chain-item.selected .more-icon {
+  color: #ffffff;
+}
+
+.prompt-chain-item .delete-option {
+  position: absolute;
+  right: 0;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 4px;
+  z-index: 1000;
+  color: #f44336; /* Red color for delete option */
+  cursor: pointer;
+}
+
+.clear-conversation-button {
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 4px;
+}
+
+.clear-conversation-button .add-prompt-button {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  line-height: 40px;
+  text-align: center;
+}
+
+.add-prompt-button .add-icon {
+  font-size: 24px;
+}
+
+.execute-button {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.execute-button .execute-chain-button {
+  font-size: 16px;
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+}
+
+.bg-light {
+  background-color: #f8f9fa !important;
+}
+
+.rounded-full {
+  border-radius: 50% !important;
+}
+
+.d-flex {
+  display: flex !important;
+}
+
+.justify-content-center {
+  justify-content: center !important;
+}
+
+.align-items-center {
+  align-items: center !important;
+}
+
+/* File Preview Container */
+.file-preview-container {
+  margin-top: 10px;
+  margin-left: 10px;
+  max-width: 100%;
+  position: relative;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.file-info {
+  display: inline-block;
+  vertical-align: middle;
+  max-width: 100%;
+  word-wrap: break-word;
+}
+
+.file-preview {
+  display: inline-block;
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+  font-size: 14px;
+  position: relative;
+  width: fit-content;
+  height: fit-content;
+}
+
+.file-preview.image-preview {
+  overflow: hidden;
+  border-radius: 5px;
+}
+
+.file-preview.image-preview img {
+  width: 135px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.file-preview.non-image-preview {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  border-radius: 5px;
+  width: fit-content;
+}
+
+.file-preview.non-image-preview .file-info {
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.file-preview.non-image-preview .file-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-right: 5px;
+}
+
+.file-preview.non-image-preview .file-extension {
+  font-size: 0.8em;
+  color: #666;
+}
+
+.file-name {
+  font-weight: bold;
+  width: 100%;
+  color: #000;
+  display: block;
+  margin-top: 5px;
+}
+
+.file-extension {
+  font-size: 12px;
+  color: #333;
+  display: block;
+}
+
+.icon-svg {
+  width: 24px;
+  height: 24px;
+  background-color: #ff5588;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.cross-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(50%, -50%);
+  border-radius: 50%;
+  padding: 2px;
+  z-index: 1;
+  background-color: #ccc;
+  border: none;
+  box-shadow: 0 0 0 1px #ccc;
+  width: 15px;
+  height: 15px;
+}
+
+.cross-button i {
+  font-size: 10px;
+  color: #000;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.tooltip-inner {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border: 1px solid #005a82 !important;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.tooltip-arrow::before {
+  border-top-color: #005a82 !important;
+  border-width: 0 0.5rem 0.5rem 0.5rem;
+}
+.prompt-container {
+  background-color: white;
+}
+.prompt-chain-panel-horizontal {
+  width: calc(100% - 80px); /* Reduce width to account for 40px margin on both sides */
+  height: 80px; /* Adjust height as needed */
+  background: #f9f9f9;
+  border-radius: 16px;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  margin-left: 40px;
+  margin-right: 40px;
+  margin-bottom: 10px;
+  z-index: 900;
+}
+
+.card-body .col-12 {
+  margin-top: 20px; /* Space above other elements within card-body */
+}
+
+.card-body .chat-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Adds space between individual chat messages */
+  padding-top: 15px; /* Adds separation from the prompt chain panel */
+}
+
+.prompt-chain-list-horizontal {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  overflow-x: auto;
+  padding: 0;
+  flex-grow: 1;
+  white-space: nowrap;
+}
+
+.dotted-line {
+  width: 40px;
+  height: 0;
+  border-top: 1px dotted #d1d1d1;
+  align-self: center;
+  margin: -36px;
+}
+
+.prompt-chain-item-horizontal {
+  display: flex;
+  align-items: center;
+  width: 220px;
+  height: 40px;
+}
+
+.prompt-item-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 200px;
+  height: 40px;
+  background: #ffffff;
+  border: 1px dashed #d1d1d1;
+  border-radius: 16px;
+  padding: 4px 8px;
+}
+
+.inner-highlight {
+  display: flex;
+  align-items: center;
+  background: #f9f9f9;
+  border-radius: 16px;
+  width: calc(100% - 30px);
+  padding: 4px 8px;
+  color: #707070;
+  transition:
+    background-color 0.3s,
+    color 0.3s; /* Smooth transition */
+}
+
+.inner-highlight.selected-inner {
+  background-color: #005a82; /* Dark blue background */
+  color: #ffffff; /* White text color on selection or hover */
+}
+
+.inner-highlight:not(.selected-inner):hover {
+  background-color: #6499b1;
+  color: #ffffff;
+}
+
+.prompt-title {
+  font-size: 16px;
+  color: inherit; /* Inherit color from .inner-highlight */
+  font-family: Ubuntu, sans-serif;
+}
+
+/* Default color for chain icon */
+.icon-link {
+  color: #6499b1;
+  transition: color 0.3s ease; /* Smooth transition */
+}
+
+/* Change color when hovered or container is selected */
+.prompt-item-container:hover .icon-link,
+.inner-highlight.selected-inner .icon-link {
+  color: #ffffff;
+}
+
+.chathistory_delete1 {
+  font-size: 30px !important; /* Force the size change */
+  line-height: 1;
+  vertical-align: middle;
+  cursor: pointer;
+  margin-right: 5px;
+  color: #a0a0a0; /* Set the initial color here */
+}
+
+.chathistory_delete1:hover {
+  color: #6499b1; /* Color on hover */
+}
+
+.horizontal-button-group {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.execute-chain-button,
+.add-prompt-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #6499b1; /* Default color */
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.execute-chain-button:hover,
+.add-prompt-button:hover {
+  background-color: #025a82; /* Color on hover */
+}
+
+.execute-chain-button,
+.byouc {
+  font-variation-settings:
+    'FILL' 100,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
+}
+
+.add-prompt-button .add-icon,
+.execute-chain-button .play-icon {
+  font-size: 24px;
+  color: white; /* Icon color */
+}
+
+.modal-header-upload {
+  border-bottom: none;
+  font-weight: bold;
+}
+
+.modal-header-upload-text {
+  text-align: left;
+  font: normal normal bold 16px/18px Ubuntu;
+  letter-spacing: 0px;
+  color: #000000;
+  opacity: 1;
+}
+
+.prompt-chain-panel-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 220px;
+  height: 40px;
+  background: #ffffff;
+  border: 1px dashed #d1d1d1;
+  border-radius: 16px;
+  padding: 4px 8px;
+  margin: 0 10px; /* Optional margin for spacing */
+  gap: 16px;
+}
+
+.empty-prompt-container {
+  width: 200px;
+  height: 30px;
+  background-color: #ffffff;
+  /* border:  #D1D1D1; */
+  border-radius: 16px;
+  background-color: #f9f9f9;
+}
+.chat-input {
+  min-width: 150px !important;
+  max-width: 658px !important;
+  top: 354px;
+  left: 1527px;
+}
+.btn:focus {
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem #ffffff;
+}
+
+.input-text-copy-bg {
+  background-color: white;
+  border-radius: 50%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  color: #025a82;
+  cursor: pointer;
+  margin-left: 4px;
+  padding: 10px;
+}
+
+.agent-dropdown-container {
+  position: relative;
+  width: 250px;
+  margin: -10px -20px;
+}
+
+.agent-dropdown {
+  appearance: none;
+  width: 100%;
+  padding: 10px 40px 10px 35px;
+  font-size: 16px;
+  border: 0px solid #ccc;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: #f5f5f7 !important;
+}
+
+.agent-dropdown-container::before {
+  content: 'support_agent';
+  font-family: 'Material Symbols Outlined';
+  color: #015a82;
+  position: absolute;
+  left: 10px;
+  top: 35%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  pointer-events: none;
+}
+
+.agent-dropdown-container::after {
+  content: 'expand_more';
+  font-family: 'Material Symbols Outlined';
+  color: #015a82;
+  position: absolute;
+  right: 10px;
+  top: 40%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  pointer-events: none;
+}
+
+.agent-dropdown:focus {
+  outline: none;
+  border-color: #015a82;
+}
+
+.agent-dropdown:hover {
+  border-color: #015a82;
+}
