@@ -1,0 +1,46 @@
+{
+  "Initiative": {
+    "id": null,
+    "type": "Agent",
+    "cloud": "AZURE",
+    "name": "DATA",
+    "multiagent_pattern": "Sequential",
+    "is_multiagent": false,
+    "termination_condition": "DONE",
+    "max_messages": 5,
+    "guardrails": [],
+    "Agents": [
+      {
+        "is_supervisor": false,
+        "agent_name": "DATA",
+        "agent_description": "DATA",
+        "agent_character": "DATADATADATADATADATADATADATADATADATADATADATADATADATADATADATADATADATADATADATADATADATADATA",
+        "tools": [],
+        "model": "gpt-4o",
+        "memory": false,
+        "guardrail": false,
+        "web_scrape": false
+      }
+    ],
+    "llms": {
+      "name": "gpt-4o",
+      "provider": "AZURE"
+    },
+    "tags": [
+      {
+        "key": "DATA",
+        "value": "DATA"
+      },
+      {
+        "key": "account_id"
+      },
+      {
+        "key": "project_id"
+      }
+    ],
+    "tools": [],
+    "files": [],
+    "created_on": "2025-06-11T05:25:50",
+    "modified_on": "2025-06-11T05:25:50"
+  }
+}

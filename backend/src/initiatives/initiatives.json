@@ -1,0 +1,164 @@
+[
+  {
+    "id": null,
+    "type": "Agent",
+    "cloud": "AWS",
+    "name": "",
+    "multiagent_pattern": "Sequential",
+    "is_multiagent": false,
+    "termination_condition": "DONE",
+    "max_messages": 5,
+    "guardrails": [],
+    "Agents": [
+      {
+        "is_supervisor": false,
+        "agent_name": "DATAvvv",
+        "agent_description": "DATAvvv",
+        "agent_character": "DATAvvvDATAvvvDATAvvvDATAvvvDATAvvvDATAvvvDATAvvvDATAvvvDATAvvvDATAvvvDATAvvvDATAvvvDATAvvvDATAvvvDATAvvvDATAvvv",
+        "tools": [],
+        "model": "anthropic.claude-3-5-sonnet-20240620-v1:0",
+        "memory": false,
+        "guardrail": false,
+        "web_scrape": false
+      }
+    ],
+    "llms": {
+      "name": "anthropic.claude-3-5-sonnet-20240620-v1:0",
+      "provider": "AWS"
+    },
+    "tags": [
+      {
+        "key": "account_id"
+      },
+      {
+        "key": "project_id"
+      }
+    ],
+    "tools": [],
+    "files": [],
+    "created_on": "2025-06-11T05:37:22",
+    "modified_on": "2025-06-11T05:37:22"
+  },
+  {
+    "id": null,
+    "type": "Agent",
+    "cloud": "AZURE",
+    "name": "NEW",
+    "multiagent_pattern": "Sequential",
+    "is_multiagent": false,
+    "termination_condition": "DONE",
+    "max_messages": 5,
+    "guardrails": [],
+    "Agents": [
+      {
+        "is_supervisor": false,
+        "agent_name": "NEW",
+        "agent_description": "NEW",
+        "agent_character": "NEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEWNEW",
+        "tools": [],
+        "model": "gpt-4o",
+        "memory": false,
+        "guardrail": false,
+        "web_scrape": false
+      }
+    ],
+    "llms": {
+      "name": "gpt-4o",
+      "provider": "AZURE"
+    },
+    "tags": [
+      {
+        "key": "account_id"
+      },
+      {
+        "key": "project_id"
+      }
+    ],
+    "tools": [],
+    "files": [],
+    "created_on": "2025-06-11T05:38:26",
+    "modified_on": "2025-06-11T05:38:26"
+  },
+  {
+    "id": "08390458-b930-4789-b595-2d2e995abff4",
+    "type": "Agent",
+    "cloud": "AZURE",
+    "name": "ABCDE",
+    "multiagent_pattern": "Sequential",
+    "is_multiagent": false,
+    "termination_condition": "DONE",
+    "max_messages": 5,
+    "guardrails": [],
+    "Agents": [
+      {
+        "is_supervisor": false,
+        "agent_name": "ABCDE",
+        "agent_description": "ABCDEABCDE",
+        "agent_character": "ABCDEABCDEABCDEABCDEABCDEABCDEABCDEABCDEABCDEABCDEABCDEABCDEABCDEABCDEABCDEABCDEABCDEABCDEABCDEABCDEABCDEABCDEABCDEABCDE",
+        "tools": [],
+        "model": "gpt-4o",
+        "memory": false,
+        "guardrail": false,
+        "web_scrape": false,
+        "agent_id": "add3c32d-a123-4849-9868-67f89856916d"
+      }
+    ],
+    "llms": {
+      "name": "gpt-4o",
+      "provider": "AZURE"
+    },
+    "tags": [
+      {
+        "key": "account_id"
+      },
+      {
+        "key": "project_id"
+      }
+    ],
+    "tools": [],
+    "files": [],
+    "created_on": "2025-06-11T06:14:20.022Z",
+    "modified_on": "2025-06-11T06:14:20.022Z"
+  },
+  {
+    "id": "57809532-5de6-424e-a010-317eb1a60afa",
+    "type": "Agent",
+    "cloud": "AZURE",
+    "name": "Initiative",
+    "multiagent_pattern": "Sequential",
+    "is_multiagent": false,
+    "termination_condition": "DONE",
+    "max_messages": 5,
+    "guardrails": [],
+    "Agents": [
+      {
+        "is_supervisor": false,
+        "agent_name": "Agent",
+        "agent_description": "Initiative",
+        "agent_character": "Initiative InitiatInitiativeInitiativeInitiativeInitiativeive InitiativeInitiative",
+        "tools": [],
+        "model": "gpt-4o",
+        "memory": false,
+        "guardrail": false,
+        "web_scrape": false,
+        "agent_id": "af4a7c35-673f-4933-b8fa-c25ce04e12fd"
+      }
+    ],
+    "llms": {
+      "name": "gpt-4o",
+      "provider": "AZURE"
+    },
+    "tags": [
+      {
+        "key": "account_id"
+      },
+      {
+        "key": "project_id"
+      }
+    ],
+    "tools": [],
+    "files": [],
+    "created_on": "2025-06-11T06:28:33.713Z",
+    "modified_on": "2025-06-11T06:28:33.713Z"
+  }
+]

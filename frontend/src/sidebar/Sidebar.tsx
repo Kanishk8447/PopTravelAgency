@@ -24,8 +24,6 @@ const Sidebar: React.FC<SidebarProps> = ({ onToggle }) => {
       .then((response) => response.json())
       .then((data: MenuItem[]) => setMenuItems(data))
       .catch((error) => console.error('Error fetching menu data:', error));
-      console.log('sdsdds',menuItems)
-
   }, []);
 
   // --- Handle click outside sidebar ---
