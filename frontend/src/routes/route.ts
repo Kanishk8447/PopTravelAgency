@@ -14,6 +14,7 @@ import ProtectedRoute from './ProtectedRoute';
 import RedirectIfAuthenticated from './RedirectIfAuthenticated';
 import RunInitiative from '../component/Interact/RunInitiative';
 import { RunInitiativeSource } from '../component/Interact/RunInitiativeSourceEnum';
+import TravelRunInitiative from '../component/Interact/TravelRunInitiative';
 
 const router = createBrowserRouter([
  
@@ -35,17 +36,23 @@ const router = createBrowserRouter([
     children: [
       
       { path: '/travel', element: React.createElement(Hero) },
-      { path: 'travel-agency', element: React.createElement(RunInitiative, {
-                source: RunInitiativeSource.Native,
-                isExpanded: false,
-                interactHeight: false
-              })},
-              { path: 'manufacturing-agency', element: React.createElement(RunInitiative, {
-                source: RunInitiativeSource.Native,
-                isExpanded: false,
-                interactHeight: false
-              })},
+      // { path: 'travel-agency', element: React.createElement(RunInitiative, {
+      //           source: RunInitiativeSource.Native,
+      //           isExpanded: false,
+      //           interactHeight: false
+      //         })},
+      //         { path: 'manufacturing-agency', element: React.createElement(RunInitiative, {
+      //           source: RunInitiativeSource.Native,
+      //           isExpanded: false,
+      //           interactHeight: false
+      //         })},
+
       { path: 'run-initiative', element: React.createElement(RunInitiative, {
+                source: RunInitiativeSource.Native,
+                isExpanded: false,
+                interactHeight: false
+              })},
+              { path: 'travel-agency', element: React.createElement(TravelRunInitiative, {
                 source: RunInitiativeSource.Native,
                 isExpanded: false,
                 interactHeight: false
