@@ -15,6 +15,7 @@ import RedirectIfAuthenticated from './RedirectIfAuthenticated';
 import RunInitiative from '../component/Interact/RunInitiative';
 import { RunInitiativeSource } from '../component/Interact/RunInitiativeSourceEnum';
 import TravelRunInitiative from '../component/Interact/TravelRunInitiative';
+import ManufacturingInitiative from '../component/Interact/ManufacturingInitiative';
 
 const router = createBrowserRouter([
  
@@ -53,6 +54,11 @@ const router = createBrowserRouter([
                 interactHeight: false
               })},
               { path: 'travel-agency', element: React.createElement(TravelRunInitiative, {
+                source: RunInitiativeSource.Native,
+                isExpanded: false,
+                interactHeight: false
+              })},
+              { path: 'manufacturing-agency', element: React.createElement(ManufacturingInitiative, {
                 source: RunInitiativeSource.Native,
                 isExpanded: false,
                 interactHeight: false

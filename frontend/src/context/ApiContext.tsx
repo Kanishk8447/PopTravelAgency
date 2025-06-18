@@ -56,12 +56,12 @@ interface ApiContextProps {
   setSelectedAgent: Dispatch<SetStateAction<Agent | null>>;
   selectedInitiative: Initiative | null;
   setSelectedInitiative: Dispatch<SetStateAction<Initiative | null>>;
-  runInitiative: boolean;
-  setRunInitiative: Dispatch<SetStateAction<boolean>>;
-  runTravel: boolean;
-  setRunTravel: Dispatch<SetStateAction<boolean>>;
-  runManufacturing: boolean;
-  setRunManufacturing: Dispatch<SetStateAction<boolean>>;
+  // runInitiative: boolean;
+  // setRunInitiative: Dispatch<SetStateAction<boolean>>;
+  // runTravel: boolean;
+  // setRunTravel: Dispatch<SetStateAction<boolean>>;
+  // runManufacturing: boolean;
+  // setRunManufacturing: Dispatch<SetStateAction<boolean>>;
   // Chat history management
   chatHistory: ChatEntry[];
   addChatEntry: (entry: ChatEntry) => void;
@@ -89,9 +89,9 @@ export const ApiProvider = ({ children }: { children: React.ReactNode }) => {
   const [selectedInitiative, setSelectedInitiative] = useState<Initiative | null>(null);
   const [selectedAgent, setSelectedAgent] = useState<Agent | null>(null);
 
-  const [runInitiative, setRunInitiative] = useState<boolean>(false);
-  const [runTravel, setRunTravel] = useState<boolean>(false);
-  const [runManufacturing, setRunManufacturing] = useState<boolean>(false);
+  // const [runInitiative, setRunInitiative] = useState<boolean>(false);
+  // const [runTravel, setRunTravel] = useState<boolean>(false);
+  // const [runManufacturing, setRunManufacturing] = useState<boolean>(false);
   
   // Chat history management
   const [chatHistory, setChatHistory] = useState<ChatEntry[]>([]);
@@ -150,7 +150,6 @@ export const ApiProvider = ({ children }: { children: React.ReactNode }) => {
     setStartOver(over);
   };
 
-  console.log('Selected runTravel:', runTravel);
 
 
   const contextValue: ApiContextProps = {
@@ -177,12 +176,12 @@ export const ApiProvider = ({ children }: { children: React.ReactNode }) => {
     setSelectedAgent,
     selectedInitiative,
     setSelectedInitiative,
-    runInitiative,
-    setRunInitiative,
-    runTravel,
-    setRunTravel,
-    runManufacturing,
-    setRunManufacturing,
+    // runInitiative,
+    // setRunInitiative,
+    // runTravel,
+    // setRunTravel,
+    // runManufacturing,
+    // setRunManufacturing,
     // Chat history management
     chatHistory,
     addChatEntry,

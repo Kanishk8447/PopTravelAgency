@@ -147,7 +147,9 @@ const mimeTypeFormats = {
 const allowedFileTypes = '.txt, .pdf, .doc, .docx, .xls, .xlsx, .csv'; // can also handle .jpeg
 const maxFiles = 5;
 const maxFileSizeKB = 250; // example: 250 KB limit
-export default function RunInitiative({
+
+
+export default function ManufacturingInitiative({
   source = RunInitiativeSource.Native,
   isExpanded = false,
   interactHeight = false
@@ -156,10 +158,7 @@ export default function RunInitiative({
   isExpanded: boolean;
   interactHeight: boolean;
 }) {
-  const CardTitle = 'Run Initiative';
-useEffect(() => {
-    updateCardTitle(CardTitle);
-  }, []);
+
   // const { initiatives } = useInitiativeStore();
   const { selectedAgent,setLoading, setSelectedAgent, selectedInitiative, setSelectedInitiative,
     // runInitiative,
@@ -188,27 +187,330 @@ useEffect(() => {
     guardrailName: string;
   } | null>(null);
 
- 
+   const CardTitle = 'Manufacturing Agency';
 
+   useEffect(() => {
+    updateCardTitle(CardTitle);
+  }, []);
+
+const [fromLocation, setFromLocation] = useState(null);
+  const [toLocation, setToLocation] = useState(null);
+  const [checkIn, setCheckIn] = useState('');
+  const [checkOut, setCheckOut] = useState('');
+  const [locations, setLocations] = useState([]);
+
+  const locationJSON = [
+    {
+      label: 'India',
+      officialName: 'Republic of India',
+      capital: ['New Delhi'],
+      region: 'Asia',
+      subregion: 'Southern Asia',
+      population: 1393409038,
+      area: 3287590,
+      timezones: ['UTC+05:30'],
+      borders: ['AFG', 'BGD', 'BTN', 'MMR', 'CHN', 'NPL', 'PAK'],
+      languages: { eng: 'English', hin: 'Hindi' },
+      currency: { INR: { name: 'Indian rupee', symbol: '₹' } },
+      flag: 'https://flagcdn.com/in.svg',
+      coatOfArms: 'https://mainfacts.com/media/images/coats_of_arms/in.svg',
+      maps: { googleMaps: 'https://goo.gl/maps/WSk3fLwG4vtPQetp7' },
+      independent: true,
+      unMember: true,
+      startOfWeek: 'monday',
+      drivingSide: 'left',
+      gini: { '2011': 35.7 },
+      car: { signs: ['IND'], side: 'left' }
+    },
+    {
+      label: 'Sweden',
+      officialName: 'Kingdom of Sweden',
+      capital: ['Stockholm'],
+      region: 'Europe',
+      subregion: 'Northern Europe',
+      population: 10353442,
+      area: 450295,
+      timezones: ['UTC+01:00'],
+      borders: ['FIN', 'NOR'],
+      languages: { swe: 'Swedish' },
+      currency: { SEK: { name: 'Swedish krona', symbol: 'kr' } },
+      flag: 'https://flagcdn.com/se.svg',
+      coatOfArms: 'https://mainfacts.com/media/images/coats_of_arms/se.svg',
+      maps: { googleMaps: 'https://goo.gl/maps/iqygE491ADVgnBW39' },
+      independent: true,
+      unMember: true,
+      startOfWeek: 'monday',
+      drivingSide: 'right',
+      gini: { '2018': 30.0 },
+      car: { signs: ['S'], side: 'right' }
+    },
+    {
+      label: 'China',
+      officialName: "People's Republic of China",
+      capital: ['Beijing'],
+      region: 'Asia',
+      subregion: 'Eastern Asia',
+      population: 1402112000,
+      area: 9706961,
+      timezones: ['UTC+08:00'],
+      borders: [
+        'AFG',
+        'BTN',
+        'MMR',
+        'HKG',
+        'IND',
+        'KAZ',
+        'PRK',
+        'KGZ',
+        'LAO',
+        'MAC',
+        'MNG',
+        'NPL',
+        'PAK',
+        'RUS',
+        'TJK',
+        'VNM'
+      ],
+      languages: { cmn: 'Mandarin' },
+      currency: { CNY: { name: 'Chinese yuan', symbol: '¥' } },
+      flag: 'https://flagcdn.com/cn.svg',
+      coatOfArms: 'https://mainfacts.com/media/images/coats_of_arms/cn.svg',
+      maps: { googleMaps: 'https://goo.gl/maps/p9qC6rFCJzA8fKzD7' },
+      independent: true,
+      unMember: true,
+      startOfWeek: 'monday',
+      drivingSide: 'right',
+      gini: { '2016': 38.5 },
+      car: { signs: ['CHN'], side: 'right' }
+    },
+    {
+      label: 'Japan',
+      officialName: 'Japan',
+      capital: ['Tokyo'],
+      region: 'Asia',
+      subregion: 'Eastern Asia',
+      population: 125960000,
+      area: 377930,
+      timezones: ['UTC+09:00'],
+      borders: [],
+      languages: { jpn: 'Japanese' },
+      currency: { JPY: { name: 'Japanese yen', symbol: '¥' } },
+      flag: 'https://flagcdn.com/jp.svg',
+      coatOfArms: 'https://mainfacts.com/media/images/coats_of_arms/jp.svg',
+      maps: { googleMaps: 'https://goo.gl/maps/NGTLSCSrA8bMrvnX9' },
+      independent: true,
+      unMember: true,
+      startOfWeek: 'monday',
+      drivingSide: 'left',
+      gini: { '2013': 32.1 },
+      car: { signs: ['J'], side: 'left' }
+    },
+    {
+      label: 'United States',
+      officialName: 'United States of America',
+      capital: ['Washington, D.C.'],
+      region: 'Americas',
+      subregion: 'Northern America',
+      population: 331002651,
+      area: 9833517,
+      continent: ['North America'],
+      timezones: [
+        'UTC−12:00',
+        'UTC−11:00',
+        'UTC−10:00',
+        'UTC−09:00',
+        'UTC−08:00',
+        'UTC−07:00',
+        'UTC−06:00',
+        'UTC−05:00',
+        'UTC+10:00',
+        'UTC+12:00'
+      ],
+      borders: ['CAN', 'MEX'],
+      languages: { eng: 'English' },
+      currency: { USD: { name: 'United States dollar', symbol: '$' } },
+      flag: 'https://flagcdn.com/us.svg',
+      coatOfArms: 'https://mainfacts.com/media/images/coats_of_arms/us.svg',
+      maps: { googleMaps: 'https://goo.gl/maps/5T6E5sQnZf9A9T2J6' },
+      independent: true,
+      unMember: true,
+      drivingSide: 'right',
+      fifa: 'USA',
+      latlng: [38.0, -97.0],
+      postalCodeFormat: '#####-####'
+    },
+    {
+      label: 'Germany',
+      officialName: 'Federal Republic of Germany',
+      capital: ['Berlin'],
+      region: 'Europe',
+      subregion: 'Western Europe',
+      population: 83783942,
+      area: 357114,
+      continent: ['Europe'],
+      timezones: ['UTC+01:00'],
+      borders: ['AUT', 'BEL', 'CZE', 'DNK', 'FRA', 'LUX', 'NLD', 'POL', 'CHE'],
+      languages: { deu: 'German' },
+      currency: { EUR: { name: 'Euro', symbol: '€' } },
+      flag: 'https://flagcdn.com/de.svg',
+      coatOfArms: 'https://mainfacts.com/media/images/coats_of_arms/de.svg',
+      maps: { googleMaps: 'https://goo.gl/maps/mD9FBMq1nvXUBrkv6' },
+      independent: true,
+      unMember: true,
+      drivingSide: 'right',
+      fifa: 'GER',
+      latlng: [51.0, 9.0],
+      postalCodeFormat: '#####'
+    },
+    {
+      label: 'France',
+      officialName: 'French Republic',
+      capital: ['Paris'],
+      region: 'Europe',
+      subregion: 'Western Europe',
+      population: 65273511,
+      area: 551695,
+      continent: ['Europe'],
+      timezones: [
+        'UTC−10:00',
+        'UTC−09:30',
+        'UTC−09:00',
+        'UTC−08:00',
+        'UTC−04:00',
+        'UTC−03:00',
+        'UTC+01:00',
+        'UTC+03:00',
+        'UTC+04:00',
+        'UTC+05:00',
+        'UTC+11:00',
+        'UTC+12:00'
+      ],
+      borders: ['AND', 'BEL', 'DEU', 'ITA', 'LUX', 'MCO', 'ESP', 'CHE'],
+      languages: { fra: 'French' },
+      currency: { EUR: { name: 'Euro', symbol: '€' } },
+      flag: 'https://flagcdn.com/fr.svg',
+      coatOfArms: 'https://mainfacts.com/media/images/coats_of_arms/fr.svg',
+      maps: { googleMaps: 'https://goo.gl/maps/g7QxxSFsWyTPKuzd7' },
+      independent: true,
+      unMember: true,
+      drivingSide: 'right',
+      fifa: 'FRA',
+      latlng: [46.0, 2.0],
+      postalCodeFormat: '#####'
+    },
+    {
+      label: 'Brazil',
+      officialName: 'Federative Republic of Brazil',
+      capital: ['Brasília'],
+      region: 'Americas',
+      subregion: 'South America',
+      population: 212559417,
+      area: 8515767,
+      continent: ['South America'],
+      timezones: ['UTC−05:00', 'UTC−04:00', 'UTC−03:00', 'UTC−02:00'],
+      borders: ['ARG', 'BOL', 'COL', 'GUF', 'GUY', 'PRY', 'PER', 'SUR', 'URY', 'VEN'],
+      languages: { por: 'Portuguese' },
+      currency: { BRL: { name: 'Brazilian real', symbol: 'R$' } },
+      flag: 'https://flagcdn.com/br.svg',
+      coatOfArms: 'https://mainfacts.com/media/images/coats_of_arms/br.svg',
+      maps: { googleMaps: 'https://goo.gl/maps/waCKk21HeeqFzkNC9' },
+      independent: true,
+      unMember: true,
+      drivingSide: 'right',
+      fifa: 'BRA',
+      latlng: [-10.0, -55.0],
+      postalCodeFormat: '#####-###'
+    },
+    {
+      label: 'Australia',
+      officialName: 'Commonwealth of Australia',
+      capital: ['Canberra'],
+      region: 'Oceania',
+      subregion: 'Australia and New Zealand',
+      population: 25499884,
+      area: 7692024,
+      continent: ['Oceania'],
+      timezones: [
+        'UTC+05:00',
+        'UTC+06:30',
+        'UTC+07:00',
+        'UTC+08:00',
+        'UTC+09:30',
+        'UTC+10:00',
+        'UTC+10:30',
+        'UTC+11:30'
+      ],
+      borders: [],
+      languages: { eng: 'English' },
+      currency: { AUD: { name: 'Australian dollar', symbol: '$' } },
+      flag: 'https://flagcdn.com/br.svg',
+      coatOfArms: 'https://mainfacts.com/media/images/coats_of_arms/br.svg',
+      maps: { googleMaps: 'https://goo.gl/maps/waCKk21HeeqFzkNC9' },
+      independent: true,
+      unMember: true,
+      drivingSide: 'right',
+      fifa: 'BRA',
+      latlng: [-10.0, -55.0],
+      postalCodeFormat: '#####-###'
+    },
+    {
+      label: 'Russia',
+      officialName: 'Russian Federation',
+      capital: ['Moscow'],
+      region: 'Europe',
+      subregion: 'Eastern Europe',
+      population: 144104080,
+      area: 17098242,
+      continent: ['Europe', 'Asia'],
+      timezones: ['UTC+03:00 to UTC+12:00'],
+      borders: [
+        'AZE',
+        'BLR',
+        'CHN',
+        'EST',
+        'FIN',
+        'GEO',
+        'KAZ',
+        'PRK',
+        'LVA',
+        'LTU',
+        'MNG',
+        'NOR',
+        'POL',
+        'UKR'
+      ],
+      languages: { rus: 'Russian' },
+      currency: { RUB: { name: 'Russian ruble', symbol: '₽' } },
+      flag: 'https://flagcdn.com/ru.svg',
+      coatOfArms: 'https://mainfacts.com/media/images/coats_of_arms/ru.svg',
+      maps: { googleMaps: 'https://goo.gl/maps/6ua6CX1mV2z5eYxZ6' },
+      independent: true,
+      unMember: true,
+      drivingSide: 'right',
+      fifa: 'RUS',
+      latlng: [60, 100],
+      postalCodeFormat: '######'
+    }
+  ];
+
+  useEffect(() => {
+    setLocations(locationJSON);
+  }, []);
+
+  const prepareTravelPrompt = () => {
+    if (!fromLocation || !toLocation || !checkIn || !checkOut) {
+      notification('error', 'Please select all fields');
+      return '';
+    }
+
+    return `Travel Destination Details:
+        FROM LOCATION: ${fromLocation.label}
+        TO LOCATION: ${toLocation.label}
+        CHECK-IN DATE: ${checkIn}
+        CHECK-OUT DATE: ${checkOut}`;
+  };
   
-  const [showTravelChat, setShowTravelChat] = useState(false);
   const [initiatives, setInitiatives] = useState();
-  
-  // // Filter chat history based on active topic
-  // const filteredChatHistory = useMemo(() => {
-  //   if (runInitiative) {
-  //     setActiveTopic('initiative');
-  //     return chatHistory.filter(chat => chat.topic === 'initiative');
-  //   } else if (runTravel) {
-  //     setActiveTopic('travel');
-  //     return chatHistory.filter(chat => chat.topic === 'travel');
-  //   } else if (runManufacturing) {
-  //     setActiveTopic('manufacturing');
-  //     return chatHistory.filter(chat => chat.topic === 'manufacturing');
-  //   }
-  //   return [];
-  // }, [chatHistory, runInitiative, runTravel, runManufacturing, setActiveTopic, showTravelChat]);
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -230,28 +532,28 @@ useEffect(() => {
 
   const location = useLocation();
 
-  // useEffect(() => {
-  //   // Check the current path and set states accordingly
-  //   if (location.pathname === '/run-initiative') {
-  //     setRunTravel(false);
-  //     setRunManufacturing(false);
-  //     setRunInitiative(true);
+//   useEffect(() => {
+//     // Check the current path and set states accordingly
+//     if (location.pathname === '/run-initiative') {
+//       setRunTravel(false);
+//       setRunManufacturing(false);
+//       setRunInitiative(true);
       
-  //     // Store state in local storage
-  //     localStorage.setItem('RunTravel', 'false');
-  //     localStorage.setItem('RunManufacturing', 'false');
-  //     localStorage.setItem('RunInitiative', 'true');
-  //   } else {
-  //     // Retrieve state from local storage for other paths
-  //     const runTravel = localStorage.getItem('RunTravel') === 'true';
-  //     const runManufacturing = localStorage.getItem('RunManufacturing') === 'true';
-  //     const runInitiative = localStorage.getItem('RunInitiative') === 'true';
+//       // Store state in local storage
+//       localStorage.setItem('RunTravel', 'false');
+//       localStorage.setItem('RunManufacturing', 'false');
+//       localStorage.setItem('RunInitiative', 'true');
+//     } else {
+//       // Retrieve state from local storage for other paths
+//       const runTravel = localStorage.getItem('RunTravel') === 'true';
+//       const runManufacturing = localStorage.getItem('RunManufacturing') === 'true';
+//       const runInitiative = localStorage.getItem('RunInitiative') === 'true';
 
-  //     setRunTravel(runTravel);
-  //     setRunManufacturing(runManufacturing);
-  //     setRunInitiative(runInitiative);
-  //   }
-  // }, [location.pathname, setRunTravel, setRunManufacturing, setRunInitiative]);
+//       setRunTravel(runTravel);
+//       setRunManufacturing(runManufacturing);
+//       setRunInitiative(runInitiative);
+//     }
+//   }, [location.pathname, setRunTravel, setRunManufacturing, setRunInitiative]);
 
 
 
@@ -523,8 +825,8 @@ useEffect(() => {
       return;
     }
 
-    // Determine the current topic based on active section
-    let currentTopic: 'initiative' | 'travel' | 'manufacturing' = 'initiative';
+    // // Determine the current topic based on active section
+    // let currentTopic: 'initiative' | 'travel' | 'manufacturing' = 'initiative';
     // if (runTravel) {
     //   currentTopic = 'travel';
     // } else if (runManufacturing) {
@@ -538,7 +840,6 @@ useEffect(() => {
       output: null,
       isLoading: true,
       fileUrls: selectedFiles.map((file) => URL.createObjectURL(file)),
-      // topic: currentTopic
     };
 
     setChatHistory((prev) => [...prev, newEntry]);
@@ -554,8 +855,8 @@ useEffect(() => {
     setDisableButton(true);
 
     try {
-      //  const endpoint = `initiative/72fdd04e-2dc4-4532-94ac-f52c2b81aed8`;
-      const endpoint = `initiative/${selectedInitiative?.id}`;
+       const endpoint = `initiative/27eba2d3-f039-477c-9eee-64847c7709df`;
+    //   const endpoint = `initiative/${selectedInitiative?.id}`;
   const apiBaseUrl = import.meta.env.VITE_REACT_APP_API_BASE_URL;
 
   const commonHeaders = {
@@ -671,7 +972,7 @@ useEffect(() => {
   }, [chatHistory]);
 
   return (
-    <div className={`${interactHeight ? 'h-100' : 'h-100'}`}>
+    <div className={`manufacturing-run-container ${interactHeight ? 'h-100' : 'h-100'}`}>
       <div className="container-margin-left" style={{ display: 'flex', height: '100%' }}>
         <div className="row w-100">
           <div className=" overflow-scroll-y d-flex h-100">
@@ -680,36 +981,7 @@ useEffect(() => {
                 <div className="ml-n3 px-2 py-1 d-flex align-items-center justify-content-center"></div>
                 <div className="d-flex"></div>
               </div>
-              <Suspense fallback={<div>Fetching Initiatives</div>}>
-                {initiatives?.data && initiatives?.data.length > 0 ? (
-                  <div className="agent-dropdown-container">
-                    <select
-                      value={selectedAgent?.agent_id || selectedInitiative?.id || ''}
-                      onChange={handleAgentChange}
-                      className="agent-dropdown border-none"
-                      disabled={!initiatives || initiatives.length === 0}>
-                      {initiatives?.data.map((initiative) => {
-                        if (initiative.Agents.length > 1) {
-                          return (
-                            <option key={initiative.id} value={initiative.id}>
-                              {' '}
-                              {initiative.name}
-                            </option>
-                          );
-                        } else {
-                          return initiative.Agents.map((agent) => (
-                            <option key={agent.agent_id} value={agent.agent_id}>
-                              {initiative.name ? initiative.name : agent.agent_name}
-                            </option>
-                          ));
-                        }
-                      })}
-                    </select>
-                  </div>
-                ) : (
-                  <div>No agents available</div>
-                )}
-              </Suspense>
+              
               <div
                 className="flex-grow-1 overflow-auto custom-scrollbar2 mt-2"
                 ref={chatContainerRef}>
@@ -791,35 +1063,12 @@ useEffect(() => {
                   ))
                 ) : (
                   <>
-                    {/* {runInitiative && ( */}
-                      <LandingPage source={source} isExpanded={isExpanded} />
-                      {/* )} */}
-                    {/* {runTravel && !showTravelChat && ( 
-                      <div className='mt-5 p-4'>
-                        <TravelLandingPage
-                          setShowTravelChat={setShowTravelChat}
-                          handleFormSubmit={handleFormSubmit}
-                          setChatInput={setChatInput}
-                          textareaRef={textareaRef}
-                          disableButton={disableButton}
-                          setDisableButton={setDisableButton}
-                          selectedInitiative={selectedInitiative}
-                          currentSession={currentSession}
-                          setCurrentSession={setCurrentSession}
-                          setChatHistory={setChatHistory}
-                          chatHistory={chatHistory}
-                        />
-                      </div>
-                    )} */}
-                    {/* {runManufacturing && ( 
-                      <div className='mt-5 p-4'>
-                        <ManufacturingLandingPage/>
-                      </div>
-                    )} */}
+                    <LandingPage source={source} isExpanded={isExpanded} />
+                   
                   </>
-                )}
+            )}
               </div>
-              {/* {(runInitiative || (runTravel && showTravelChat)) && ( */}
+              {chatHistory.length > 0 && (
               <div
                 className={`p-1 ${source === RunInitiativeSource.Interact && !isExpanded ? '' : 'mx-129'} mb-3 `}
                 {...getRootProps()}
@@ -897,9 +1146,7 @@ useEffect(() => {
                     <span
                       className="input-group-text right-rounded-bg d-flex no-border"
                       style={{ gap: '0.5rem' }}>
-                     
                       
-
                       {/* Send button */}
                       <button
                         type="submit"
@@ -914,11 +1161,11 @@ useEffect(() => {
                   </div>
                 </form>
               </div>
-                            {/* )} */}
+            )}
             </div>
           </div>
         </div>
-      </div>{' '}
+      </div>
     </div>
   );
 }
@@ -941,12 +1188,12 @@ const LandingPage = ({
         />
       </div>
       <h2
-        className={`${source === RunInitiativeSource.Interact && !isExpanded ? '' : 'medium-weight-margined'}`}>
+        className={`text-white ${source === RunInitiativeSource.Interact && !isExpanded ? '' : 'medium-weight-margined'}`}>
         {' '}
-        Welcome to Run Initiative!{' '}
+        Welcome to Manufacturing Agency!{' '}
       </h2>
       <p
-        className={`semi-thick text-center justify-content-center align-items-center mx-auto mt-2 ${source === RunInitiativeSource.Interact && !isExpanded ? '' : ' wide-margined'}`}>
+        className={`text-white semi-thick text-center justify-content-center align-items-center mx-auto mt-2 ${source === RunInitiativeSource.Interact && !isExpanded ? '' : ' wide-margined'}`}>
         Unleash your creativity and customize your AI interactions right here. Refine and run your
         initiatives, enabling interaction in a chat-like environment. Test and execute your
         initiatives to receive responses. Dive in and start creating—your next innovation begins
