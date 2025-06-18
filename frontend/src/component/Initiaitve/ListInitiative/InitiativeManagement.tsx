@@ -2,10 +2,11 @@ import { useState, useEffect } from 'react';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { notification } from '../../../service/notification-Service';
 import apiService from '../../../service/apiService';
+import { useApi } from '../../../context/ApiContext';
 
 const InitiativeManagement = () => {
   const navigate = useNavigate();
-  // const { updateCardTitle } = useCardTitle();
+  const { updateCardTitle } = useApi();
   // const { initiatives } = useInitiativeStore();
   const [selectedInitiativeValue, setSelectedInitiativeValue] = useState<any>(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -15,11 +16,11 @@ const InitiativeManagement = () => {
  useEffect(()=>{
       const fetchData= async ()=>{
         try {
-          const response = await apiService.getData('initiatives');
+        const response = await apiService.getData('api/initiative/list');
+        console.log('Response:', response);
           if (response) {
-                    setInitiatives(response);
-
-            notification('success', 'Search successful!');
+            setInitiatives(response?.data);
+            // notification('success', 'Search successful!');
           }
         } catch (error) {
           setLoading(false);
@@ -32,9 +33,9 @@ const InitiativeManagement = () => {
       fetchData();
     }, []);
 
-  // useEffect(() => {
-  //   updateCardTitle('Initiative Details');
-  // }, [updateCardTitle]);
+  useEffect(() => {
+    updateCardTitle('Initiative Details');
+  }, [updateCardTitle]);
 
   // useEffect(() => {
   //   fetch('/listInitiative.json')
@@ -69,7 +70,7 @@ const InitiativeManagement = () => {
 
   return (
     <>
-      <div className="row ml-1">
+       <div className="row ml-1">
         <div className="col-md-3">
           <div className="d-flex justify-content-between mb-2">
             <span className="stepper-heading fw-bold">Initiatives</span>
@@ -77,7 +78,6 @@ const InitiativeManagement = () => {
           <div>
             <div className="row">
               <div className="std-background std-border-radius py-3 mb-3 mt-2 px-2">
-                {/* Initiative List */}
                 <div className="input-container mt-3 mb-4 d-flex align-items-center justify-content-center">
                   <span
                     className="material-icons-round search-icon mt-1 p-2 "
@@ -100,9 +100,9 @@ const InitiativeManagement = () => {
                   </div>
                 ) : (
                   <div className="col-md-12 pt-2 usecasescroll-model std-background px-2">
-                    {/* {initiatives.length > 0 ? (
-                    initiatives.map((initiative) => ( */}
-                    {filteredInitiatives.length > 0 ? (
+                     {/* {initiatives.length > 0 ? (
+                    initiatives.map((initiative) => (  */}
+                   {filteredInitiatives.length > 0 ? (
                       filteredInitiatives.map((initiative) => (
                         <div key={initiative.id}>
                           <div
@@ -192,7 +192,7 @@ const InitiativeManagement = () => {
           </div>
         </div>
         <Outlet />
-      </div>
+      </div> 
     </>
   );
 };

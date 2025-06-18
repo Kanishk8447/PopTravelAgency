@@ -32,11 +32,11 @@ const AgentDetails = () => {
  useEffect(()=>{
       const fetchData= async ()=>{
         try {
-          const response = await apiService.getData('initiatives');
+        const response = await apiService.getData('api/initiative/list');
           if (response) {
-                    setInitiatives(response);
+            setInitiatives(response?.data);
 
-            notification('success', 'Search successful!');
+            // notification('success', 'Search successful!');
           }
         } catch (error) {
           setLoading(false);
@@ -50,24 +50,7 @@ const AgentDetails = () => {
     }, []);
 
 
-  const handleDeleteInitiative = async (id: string): Promise<void> => {
-    try {
-      setLoading(true);
-      const data = { id: id };
-      const result = await apiService.postData('delete-inititaitve', data);
-
-      if (result) {
-        setTimeout(() => {
-          window.location.reload();
-        }, 200);
-      }
-    } catch (error) {
-      setLoading(false);
-      console.error('Error deleting Initiative:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
+ 
 
   // Find the initiative that contains the given agent_id
   const initiative = initiatives.find((item) =>

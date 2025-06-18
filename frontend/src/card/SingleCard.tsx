@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import './card.css';
 // import { useCardTitle } from '../contexts/CardTitleContext';
 import { useLocation } from 'react-router-dom';
+import { useApi } from '../context/ApiContext';
 
 const SingleCard = ({ children }: { children: React.ReactNode }) => {
-//   const { cardTitle } = useCardTitle();
+  const { cardTitle } = useApi();
   const [card1Size, setCard1Size] = useState({ width: '100%', height: 'calc(100vh - 160px)' });
   //   const {isGenericChat } = useGenericChat();
   const location = useLocation();
@@ -40,7 +41,7 @@ const SingleCard = ({ children }: { children: React.ReactNode }) => {
                 <span className="material-symbols-outlined icon text-primary-th">
                   format_image_right
                 </span>
-                {/* <span className=" stepper-heading heading font-weight-normal">{cardTitle}</span> */}
+                <span className=" stepper-heading heading font-weight-normal">{cardTitle}</span>
               </h4>
             </div>
             <div
