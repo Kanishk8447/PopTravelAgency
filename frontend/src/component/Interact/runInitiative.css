@@ -1085,3 +1085,44 @@
       padding: 0.5rem;
       border-radius: 0.5rem;
 }
+
+/* Chat context indicator styles */
+.chat-context-indicator {
+  display: flex;
+  align-items: center;
+}
+
+.chat-context-indicator .badge {
+  font-size: 0.9rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 1rem;
+  font-weight: 500;
+}
+
+.badge.bg-primary {
+  background-color: #007bff !important;
+  color: white;
+}
+
+.badge.bg-success {
+  background-color: #28a745 !important;
+  color: white;
+}
+
+.badge.bg-warning {
+  background-color: #ffc107 !important;
+  color: #212529;
+}
+
+/* Clear history button styles */
+.btn-outline-secondary {
+  border: 1px solid #6c757d;
+  color: #6c757d;
+  background-color: transparent;
+  transition: all 0.2s ease;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #6c757d;
+  color: white;
+}

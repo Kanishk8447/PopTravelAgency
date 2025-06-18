@@ -42,12 +42,12 @@ const ReviewInitiative = ({ formValues, handleChange }: ReviewInitiativeProps) =
 
 
 
-  useEffect(() => {
-      fetch('/models.json')
-        .then((response) => response.json())
-        .then((data) => setAllModels(data))
-        .catch((error) => console.error('Error fetching menu data:', error));
-    }, []);
+  // useEffect(() => {
+  //     fetch('/models.json')
+  //       .then((response) => response.json())
+  //       .then((data) => setAllModels(data))
+  //       .catch((error) => console.error('Error fetching menu data:', error));
+  //   }, []);
 
 
 
@@ -198,6 +198,7 @@ const ReviewInitiative = ({ formValues, handleChange }: ReviewInitiativeProps) =
                         {agent.model || 'Not selected'}
                       </label>
                     </div>
+                    
                     {formValues.cloud === 'AWS' && (
                       <>
                         <div className="col-md-12 d-flex d-row align-items-top mt-3">
@@ -218,16 +219,6 @@ const ReviewInitiative = ({ formValues, handleChange }: ReviewInitiativeProps) =
                           </label>
                           <label className="col-md-6 custom-label" style={{ fontSize: '1.2rem' }}>
                             {agent.memory ? 'true' : 'false'}
-                          </label>
-                        </div>
-                        <div className="col-md-12 d-flex d-row align-items-top mt-3">
-                          <label
-                            className="col-md-6 custom-label me-2"
-                            style={{ fontSize: '1.2rem' }}>
-                            Tool:
-                          </label>
-                          <label className="col-md-6 custom-label" style={{ fontSize: '1.2rem' }}>
-                            {agent?.web_scrape ? 'True' : 'False'}
                           </label>
                         </div>
                       </>

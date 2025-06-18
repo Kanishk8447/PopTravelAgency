@@ -1,4 +1,5 @@
-import { useEffect, useRef, FormEvent, useState, Suspense, FC, useMemo } from 'react';
+import { useEffect, useRef, useState, Suspense, useMemo } from 'react';
+import type { FormEvent, FC } from 'react';
 // import { useCardTitle } from '../../contexts/CardTitleContext';
 import { useDropzone } from 'react-dropzone';
 import apiService from '../../service/apiService';
@@ -15,6 +16,7 @@ import { RunInitiativeSource } from './RunInitiativeSourceEnum';
 // import useFormInput from '../../hooks/handleFormInput';
 // import GuardrailFailureModal from '../../Modals/GuardrailFailureModal';
 import { useApi } from '../../context/ApiContext';
+import type { ChatEntry } from '../../context/ApiContext';
 import Select from 'react-select';
 import '../TravelAgency/travel.css';
 import { useLocation } from 'react-router-dom';
@@ -161,66 +163,80 @@ export default function RunInitiative({
 }) {
   const CardTitle = 'Run Initiative';
 
-  // const { updateCardTitle } = useCardTitle();
-  // const { initiatives } = useInitiativeStore();
-
-
-  const { selectedAgent, setSelectedAgent, selectedInitiative, setSelectedInitiative, setLoading,
+  const { 
+    selectedAgent, 
+    setSelectedAgent, 
+    selectedInitiative = true, 
+    setSelectedInitiative, 
+    setLoading,
     runInitiative,
     setRunInitiative,
     runTravel,
     setRunTravel,
     runManufacturing,
-    setRunManufacturing
-   } =
-    useApi();
-
-  const [chatHistory, setChatHistory] = useState<ChatEntry[]>([]);
-  const [currentSession, setCurrentSession] = useState<string | null>(null);
+    setRunManufacturing,
+    // Chat history from context
+    chatHistory,
+    addChatEntry,
+    updateChatEntry,
+    clearChatHistory,
+    currentSession,
+    setCurrentSession,
+    activeTopic,
+    setActiveTopic
+  } = useApi();
+  
   const chatContainerRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [chatInput, setChatInput] = useState('');
-  const [disableButton, setDisableButton] = useState(false);
-  const [guardrailModalOpen, setGuardrailModalOpen] = useState(false);
+  const [disableButton, setDisableButton] = useState(false);  const [guardrailModalOpen, setGuardrailModalOpen] = useState(false);
   const [guardrailReasons, setGuardrailReasons] = useState('');
   const [guardrailFailureData, setGuardrailFailureData] = useState<{
     failureReason: string;
-    guardrailName: string;
-  } | null>(null);
-
+    guardrailName: string;  } | null>(null);
   
-  // const { uploadFile } = useFormInput([], [], [], {});
+  const [showTravelChat, setShowTravelChat] = useState(false);
+  const [initiatives, setInitiatives] = useState();
+  
+  // Filter chat history based on active topic
+  const filteredChatHistory = useMemo(() => {
+    if (runInitiative) {
+      setActiveTopic('initiative');
+      return chatHistory.filter(chat => chat.topic === 'initiative');
+    } else if (runTravel) {
+      setActiveTopic('travel');
+      return chatHistory.filter(chat => chat.topic === 'travel');
+    } else if (runManufacturing) {
+      setActiveTopic('manufacturing');
+      return chatHistory.filter(chat => chat.topic === 'manufacturing');
+    }
+    return [];
+  }, [chatHistory, runInitiative, runTravel, runManufacturing, setActiveTopic, showTravelChat]);
 
-  // useEffect(() => {
-  //   updateCardTitle(CardTitle);
-  // }, []);
 
-  const [initiatives, setInitiatives] = useState<any[]>([]);
-    useEffect(()=>{
-      const fetchData= async ()=>{
-        try {
-          const response = await apiService.getData('initiatives');
-          if (response) {
-                    setInitiatives(response);
-
-            // notification('success', 'Search successful!');
-          }
-        } catch (error) {
-          setLoading(false);
-          console.error('Error:', error);
-          notification('error', 'Failed to search. Try again!');
-        } finally {
-          setLoading(false);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await apiService.getData('api/initiative/list');
+        if (response) {
+          setInitiatives(response);
         }
+      } catch (error) {
+        setLoading(false);
+        console.error('Error:', error);
+        notification('error', 'Failed to search. Try again!');
+      } finally {
+        setLoading(false);
       }
-      fetchData();
-    }, []);
+    }
+    fetchData();
+  }, []);
 
-    const location = useLocation();
+  const location = useLocation();
 
-    useEffect(() => {
+  useEffect(() => {
     // Check the current path and set states accordingly
     if (location.pathname === '/run-initiative') {
       setRunTravel(false);
@@ -487,10 +503,10 @@ export default function RunInitiative({
 
     if (disableButton) return;
 
-    if (!selectedInitiative) {
-      notification('error', 'Please select an agent');
-      return;
-    }
+    // if (!selectedInitiative) {
+    //   notification('error', 'Please select an agent');
+    //   return;
+    // }
 
     const trimmedText = chatInput.trim();
     const hasFiles = selectedFiles.length > 0;
@@ -513,15 +529,26 @@ export default function RunInitiative({
       return;
     }
 
+    // Determine the current topic based on active section
+    let currentTopic: 'initiative' | 'travel' | 'manufacturing' = 'initiative';
+    if (runTravel) {
+      currentTopic = 'travel';
+    } else if (runManufacturing) {
+      currentTopic = 'manufacturing';
+    }
+
+    // Create a new chat entry with appropriate topic
     const newEntry: ChatEntry = {
       sessionId: currentSession || '',
       input: trimmedText,
       output: null,
       isLoading: true,
-      fileUrls: selectedFiles.map((file) => URL.createObjectURL(file))
+      fileUrls: selectedFiles.map((file) => URL.createObjectURL(file)),
+      topic: currentTopic
     };
 
-    setChatHistory((prev) => [...prev, newEntry]);
+    // Add to context's chat history
+    addChatEntry(newEntry);
 
     setSelectedFiles([]);
 
@@ -531,7 +558,7 @@ export default function RunInitiative({
 
     setDisableButton(true);
 
-    try {
+ try {
       const endpoint = `initiative/${selectedInitiative.id}`;
       const apiBaseUrl = import.meta.env.VITE_REACT_APP_API_BASE_URL;
 
@@ -591,12 +618,9 @@ export default function RunInitiative({
             setGuardrailModalOpen(true);
           }
 
-          // Remove the loading state from chat history
-          setChatHistory((prev) =>
-            prev.map((entry, idx) =>
-              idx === prev.length - 1 ? { ...entry, isLoading: false, output: null } : entry
-            )
-          );
+          // Update the last entry to remove loading state
+          const lastEntryIndex = chatHistory.length - 1;
+          updateChatEntry(lastEntryIndex, { isLoading: false, output: null });
 
           return; // Stop further processing
         }
@@ -605,23 +629,25 @@ export default function RunInitiative({
         output_text = responseData.output_text;
       }
 
-      setChatHistory((prev) =>
-        prev.map((entry, idx) =>
-          idx === prev.length - 1
-            ? { ...entry, sessionId: session_id, output: output_text, isLoading: false }
-            : entry
-        )
-      );
+      // Update the last entry with the response data
+      const lastEntryIndex = chatHistory.length - 1;
+      updateChatEntry(lastEntryIndex, {
+        sessionId: session_id,
+        output: output_text,
+        isLoading: false
+      });
+      
       setCurrentSession(session_id);
     } catch (error) {
       console.error('Error fetching chat response:', error);
-      setChatHistory((prev) =>
-        prev.map((entry, idx) =>
-          idx === prev.length - 1
-            ? { ...entry, output: ['Error occurred'], isLoading: false, statusCode: 500 }
-            : entry
-        )
-      );
+      
+      // Update the last entry with an error message
+      const lastEntryIndex = chatHistory.length - 1;
+      updateChatEntry(lastEntryIndex, {
+        output: ['Error occurred'],
+        isLoading: false,
+        statusCode: 500
+      });
     } finally {
       setChatInput('');
       setSelectedFiles([]);
@@ -636,7 +662,7 @@ export default function RunInitiative({
     if (chatContainerRef.current) {
       chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
     }
-  }, [chatHistory]);
+  }, [filteredChatHistory]);
 
   return (
     <div className={`${runTravel && 'travel-run-container'} ${runManufacturing && 'manufacturing-run-container'} ${interactHeight ? 'h-100' : 'h-100'}`}>
@@ -649,14 +675,14 @@ export default function RunInitiative({
                 <div className="d-flex"></div>
               </div>
               <Suspense fallback={<div>Fetching Initiatives</div>}>
-                {initiatives && initiatives.length > 0 ? (
+                {initiatives?.data && initiatives?.data.length > 0 ? (
                   <div className="agent-dropdown-container">
                     <select
                       value={selectedAgent?.agent_id || selectedInitiative?.id || ''}
                       onChange={handleAgentChange}
                       className="agent-dropdown border-none"
                       disabled={!initiatives || initiatives.length === 0}>
-                      {initiatives.map((initiative) => {
+                      {initiatives?.data.map((initiative) => {
                         if (initiative.Agents.length > 1) {
                           return (
                             <option key={initiative.id} value={initiative.id}>
@@ -676,41 +702,20 @@ export default function RunInitiative({
                   </div>
                 ) : (
                   <div>No agents available</div>
-                )}
+                )}              
               </Suspense>
+              
+              
               <div
                 className="flex-grow-1 overflow-auto custom-scrollbar2 mt-2"
                 ref={chatContainerRef}>
-                {chatHistory.length > 0 ? (
-                  chatHistory.map((chat, index) => (
+                {filteredChatHistory.length > 0 ? (
+                  filteredChatHistory.map((chat, index) => (
                     <div
                       key={index}
                       className={`mb-2 ${source === RunInitiativeSource.Interact ? '' : 'mx-129'}`}>
                       <div className="d-flex justify-content-end mb-1 mx-2">
                         <div className="chat-input-animation flex-column mb-1 p-3 mr-2 flexible-box">
-                          {/* {Array.isArray(chat.fileUrls) && chat.fileUrls.length > 0 && (
-                            <div className="d-flex flex-wrap mb-2">
-                              {chat.fileUrls.map((fileUrl, i) => (
-                                <div
-                                  key={i}
-                                  style={{
-                                    border: '1px solid #ccc',
-                                    borderRadius: '4px',
-                                    padding: '4px',
-                                    marginRight: '8px'
-                                  }}>
-                                  <span
-                                    className="material-symbols-outlined"
-                                    style={{ marginRight: '6px' }}>
-                                    description
-                                  </span>
-                                  <span>File {i + 1}</span>
-                                </div>
-                              ))}
-                            </div>
-                          )} */}
-
-                     
                           <div className="chat-input chat-input-font chat-input-animation mb-2">
                             {chat.input}
                           </div>
@@ -784,10 +789,17 @@ export default function RunInitiative({
                 ) : (
                   <>
                     {runInitiative && (<LandingPage source={source} isExpanded={isExpanded} />)}
-                  
-                    {runTravel && ( 
+                    {runTravel && !showTravelChat && ( 
                       <div className='mt-5 p-4'>
-                        <TravelLandingPage/>
+                        <TravelLandingPage 
+                          setShowTravelChat={setShowTravelChat}
+                          handleFormSubmit={handleFormSubmit}
+                          setChatInput={setChatInput}
+                          textareaRef={textareaRef}
+                          disableButton={disableButton}
+                          setDisableButton={setDisableButton}
+                          selectedInitiative={selectedInitiative}
+                        />
                       </div>
                     )}
                     {runManufacturing && ( 
@@ -798,7 +810,7 @@ export default function RunInitiative({
                   </>
                 )}
               </div>
-              {runInitiative && (
+              {(runInitiative || (runTravel && showTravelChat)) && (
                 <div
                 className={`p-1 ${source === RunInitiativeSource.Interact && !isExpanded ? '' : 'mx-129'} mb-3 `}
                 {...getRootProps()}
@@ -947,27 +959,19 @@ const LandingPage = ({
 
 
 const TravelLandingPage = ({
-  source = RunInitiativeSource.Native,
-  isExpanded
+  setShowTravelChat,selectedInitiative
 }: {
-  source: string;
-  isExpanded: boolean;
+  setShowTravelChat?: (show: boolean) => void;
+  selectedInitiative?: any;
 }) => {
+  const { addChatEntry, setCurrentSession } = useApi();
+  const [fromLocation, setFromLocation] = useState(null);
+  const [toLocation, setToLocation] = useState(null);
+  const [checkIn, setCheckIn] = useState('');
+  const [checkOut, setCheckOut] = useState('');
+  const [locations, setLocations] = useState([]);
 
-  // Travel UI
-  const { setLoading } =
-    useApi();
-    const [fromLocation, setFromLocation] = useState(null);
-    const [toLocation, setToLocation] = useState(null);
-    const [checkIn, setCheckIn] = useState('');
-    const [checkOut, setCheckOut] = useState('');
-    const [locations, setLocations] = useState([]);
-    const [inputValueFrom, setInputValueFrom] = useState('');
-    const [inputValueTo, setInputValueTo] = useState('');
-    const [data, setData] = useState('');
-
-
-     const locationJSON = [
+  const locationJSON = [
     {
       label: 'India',
       officialName: 'Republic of India',
@@ -1261,219 +1265,200 @@ const TravelLandingPage = ({
     }
   ];
 
-  // Fetch locations (cities, states, countries) from Google API
   useEffect(() => {
-    const fetchLocations = async (query = '') => {
-      try {
-        // const response = await axios.get('https://restcountries.com/v3.1/all');
+    setLocations(locationJSON);
+  }, []);
 
-        // const places = response.data
-        //   .filter((place) => place.name.common.toLowerCase().includes(query.toLowerCase())) // Filter based on query
-        //   .map((place) => ({
-        //     value: place.cca2, // Use 'cca2' as the unique identifier (country code)
-        //     label: place.name.common, // Use the common name of the country as the label
-        //     type: 'location', // Type to classify the data (can be 'country', 'state', etc.)
-        //     capital: place.capital ? place.capital[0] : 'N/A', // Get the capital, or 'N/A' if not available
-        //     flag: place.flags ? place.flags.png : 'N/A' // Get the flag image URL if available
-        //   }));
-
-        // setLocations(places);
-        setLocations(locationJSON);
-      } catch (error) {
-        console.error('Error fetching locations:', error);
-        notification('error', 'Failed to fetch locations!');
-      }
-    };
-
-    // Fetch locations for both input fields
-    fetchLocations(inputValueFrom); // Fetch locations based on the 'From' field input value
-    fetchLocations(inputValueTo); // Fetch locations based on the 'To' field input value
-  }, [inputValueFrom, inputValueTo]); // Trigger fetch whenever input values change
-
-  const handleInputChangeFrom = (inputValue) => {
-    setInputValueFrom(inputValue); // Update the input value state for 'From' field
-  };
-
-  const handleInputChangeTo = (inputValue) => {
-    setInputValueTo(inputValue); // Update the input value state for 'To' field
-  };
-
-  useEffect(()=>{
-    const fetchData= async ()=>{
-      try {
-        // Make a call to your backend API with the selected data
-        const response = await apiService.getData('list');
-        console.log('done',response)
-        if (response) {
-        
-          notification('success', 'Search successful!');
-        }
-      } catch (error) {
-        setLoading(false);
-        console.error('Error:', error);
-        notification('error', 'Failed to search. Try again!');
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchData();
-  }, [data]);
-
-
-  const handleExplore = async () => {
+  const prepareTravelPrompt = () => {
     if (!fromLocation || !toLocation || !checkIn || !checkOut) {
       notification('error', 'Please select all fields');
-      return;
+      return '';
     }
-    setLoading(true);
 
-    const requestData = {
-      // from: fromLocation.label,
-      // to: toLocation.label,
-      // checkIn,
-      // checkOut
-      input_message: `Travel Destination Finder: I'll help you discover great travel destinations based on your preferences. Simply share:
+    return `Travel Destination Details:
+FROM LOCATION: ${fromLocation.label}
+TO LOCATION: ${toLocation.label}
+CHECK-IN DATE: ${checkIn}
+CHECK-OUT DATE: ${checkOut}`;
+  };
 
-          FROM LOCATION: ${fromLocation.label}
-          TO LOCATION: ${toLocation.label}
-          CHECK-IN DATE: ${checkIn}
-          CHECK-OUT DATE: ${checkOut}
+  // const handleSubmitPrompt = () => {
+  //   const travelPrompt = prepareTravelPrompt();
 
-          For example: "FROM LOCATION: Goa,TO LOCATION: Delhi CHECK-IN DATE: December 20, 2023, CHECK-OUT DATE: December 27, 2023"
+  //   if (travelPrompt) {
+  //     const sessionId = Date.now().toString(); // Generate a unique session ID
+  //     setCurrentSession(sessionId);
 
-          I'll provide detailed information about your destination including:
-          • Popular attractions and activities
-          • Accommodation options for different budgets
-          • Transportation recommendations
-          • Seasonal considerations for your travel dates
-          • Estimated overall budget and fetch available tickets
-          • Cultural experiences and local cuisine
+  //     // Create a new chat entry with the travel details
+  //     const newChatEntry = {
+  //       sessionId: sessionId,
+  //       input: travelPrompt,
+  //       output: null,
+  //       isLoading: false,
+  //       topic: 'travel'
+  //     };
 
-          Tour Packages: I will also provide information on various tour packages available, including:
+  //     // Add the chat entry to the chat history
+  //     addChatEntry(newChatEntry);
 
-            Types of Packages: Examples of available travel packages (e.g., all-inclusive, adventure, luxury).
-            Inclusions: What is typically included in these packages (e.g., meals, tours, transportation).
-            Comparisons: Comparing different packages to help you choose the best option.
+      
+  //     if (setShowTravelChat) {
+  //       setShowTravelChat(true);
+  //     }
+  //   } else {
+  //     notification('error', 'Failed to prepare prompt');
+  //   }
+  // };
 
-          Additionally, I can check the available tickets for flights and trains, fetching the latest details from  or provide me the URL.
-          If you have specific interests (beaches, mountains, historical sites, adventure activities, etc.), please mention those as well for more tailored recommendations!
+  
+  const handleSubmitPrompt = async () => {
+    const travelPrompt = prepareTravelPrompt();
 
-          Ready to plan your perfect getaway? Just fill in your details above!
-          `
-    };
+    if (travelPrompt) {
+      const sessionId = Date.now().toString(); // Generate a unique session ID
+      setCurrentSession(sessionId);
 
-    try {
-      // Make a call to your backend API with the selected data
-      const response = await apiService.postData(
-        'initiative/e1027b83-2499-41a3-a4f5-a5fd968c4c53',
-        // 'initiative/c844be48-660b-40f1-ac82-c0a8bd6713a2',
-        // 'initiative/c5663eef-0fcd-42d3-8d67-455fd1df391a',
-        requestData
-      );
-      if (response) {
-        setData(response.output_text);
-        notification('success', 'Search successful!');
-      }
-    } catch (error) {
-      setLoading(false);
-      console.error('Error:', error);
-      notification('error', 'Failed to search. Try again!');
-    } finally {
-      setLoading(false);
+      // Create a new chat entry with the travel details
+      const newChatEntry = {
+        sessionId: sessionId,
+        input: travelPrompt,
+        output: null,
+        isLoading: true, // Set isLoading to true while fetching data
+        topic: 'travel'
+      };
+
+      // Add the chat entry to the chat history
+      addChatEntry(newChatEntry);
+
+      try {
+        // const endpoint = `initiative/e1027b83-2499-41a3-a4f5-a5fd968c4c53`; 
+              const endpoint = `initiative/${selectedInitiative.id}`;
+
+        const payload = { input_message: travelPrompt };
+
+        // Call the API
+        const response = await apiService.postData(endpoint, payload);
+
+        // Update the chat entry with the response
+        const lastEntryIndex = chatHistory.length - 1;
+        updateChatEntry(lastEntryIndex, {
+          sessionId: sessionId,
+          output: response.output_text || [`Travel details fetched successfully.`],
+          isLoading: false,
+          topic: 'travel'
+        });
+
+        notification('success', 'Travel details fetched successfully!');
+        
+        if (setShowTravelChat) {
+          setShowTravelChat(true);
+        }
+      } catch (error) {
+        console.error('Error fetching travel details:', error);
+        notification('error', 'Failed to fetch travel details. Try again!');
+        if (setShowTravelChat) {
+          setShowTravelChat(true);
+        }
+
+    } else {
+      notification('error', 'Failed to prepare prompt');
     }
   };
+
 
   return (
     <div className='d-flex align-items-center justify-content-center'>
-                              
-                              <div className="row">
-                                <div className="col-md-12 text-center">
-                                  <h1 className='text-bold'>TRAVEL TO EXPLORE</h1>
-                                  <p className='text-bold'>Find destinations at city, state, or country levels.</p>
-                                </div>
-                                <div className="row searchBox mt-5">
-                                  <div className="  col-md-3">
-                                    <label>From</label>
-                                    <Select
-                                      options={locations}
-                                      value={fromLocation}
-                                      onChange={setFromLocation}
-                                      onInputChange={handleInputChangeFrom}
-                                      placeholder="Search for Country..."
-                                      styles={{
-                                        container: (provided) => ({
-                                          ...provided,
-                                          // width: '250px' // Fixed width for the select container
-                                        }),
-                                        control: (provided) => ({
-                                          ...provided,
-                                          // width: '100%',
-                                          border: 'none', // Removes border
-                                          boxShadow: 'none' // Prevents focus outline
-                                        })
-                                      }}
-                                    />
-                                  </div>
-                                  <div className="  col-md-3">
-                                    <label>To</label>
-                                    <Select
-                                      options={locations}
-                                      value={toLocation}
-                                      onChange={setToLocation}
-                                      onInputChange={handleInputChangeTo}
-                                      placeholder="Search for destination..."
-                                      classNames={{
-                                        container: () => 'bg-white border border-3 rounded-5'
-                                      }}
-                                      styles={{
-                                        container: (provided) => ({
-                                          ...provided,
-                                          width: '250px'
-                                        }),
-                                        control: (provided) => ({
-                                          ...provided,
-                                          width: '100%',
-                                          border: 'none', // Removes border
-                                          boxShadow: 'none' // Prevents focus outline
-                                        })
-                                      }}
-                                    />
-                                  </div>
-                                  <div className="  col-md-3">
-                                    <label>Check-in</label>
-                                    <input
-                                      type="date"
-                                      className=" bg-white border-3 rounded-2"
-                                      value={checkIn}
-                                      onChange={(e) => setCheckIn(e.target.value)}
-                                      min={new Date().toISOString().split('T')[0]}
-                                    />
-                                  </div>
-                                  <div className="  col-md-3">
-                                    <label>Check-out</label>
-                                    <input
-                                      type="date"
-                                      value={checkOut}
-                                      className=" bg-white border-3 rounded-2"
-                                      onChange={(e) => setCheckOut(e.target.value)}
-                                      min={
-                                        checkIn
-                                          ? new Date(new Date(checkIn).getTime() + 86400000).toISOString().split('T')[0]
-                                          : new Date().toISOString().split('T')[0]
-                                      }
-                                    />
-                                  </div>
-                                  
-                                </div>
-                                <div className=' d-flex justify-content-center mt-5'>
-                                  <button className="btn btn-primary p-3 text-center rounded-3" onClick={handleExplore}>
-                                    Explore Now
-                                  </button>
-                                </div>
-                              </div>
-                            </div>
+      <div className="row">
+        <div className="col-md-12 text-center">
+          <h1 className='text-bold'>TRAVEL TO EXPLORE</h1>
+          <p className='text-bold'>Find destinations at city, state, or country levels.</p>
+        </div>
+        <div className="row searchBox mt-5">
+          <div className="col-md-3">
+            <label>From</label>
+            <Select
+              options={locations}
+              value={fromLocation}
+              onChange={setFromLocation}
+              placeholder="Search for Country..."
+              styles={{
+                container: (provided) => ({
+                  ...provided,
+                }),
+                control: (provided) => ({
+                  ...provided,
+                  border: 'none',
+                  boxShadow: 'none'
+                })
+              }}
+            />
+          </div>
+          <div className="col-md-3">
+            <label>To</label>
+            <Select
+              options={locations}
+              value={toLocation}
+              onChange={setToLocation}
+              placeholder="Search for destination..."
+              styles={{
+                container: (provided) => ({
+                  ...provided,
+                  width: '250px'
+                }),
+                control: (provided) => ({
+                  ...provided,
+                  border: 'none',
+                  boxShadow: 'none'
+                })
+              }}
+            />
+            
+          </div>
+          <div className="col-md-3">
+            <label>Check-in</label>
+            <input
+              type="date"
+              className="bg-white  rounded-2"
+              value={checkIn}
+              onChange={(e) => setCheckIn(e.target.value)}
+              min={new Date().toISOString().split('T')[0]}
+            />
+          </div>
+          <div className="col-md-3">
+            <label>Check-out</label>
+            <input
+              type="date"
+              value={checkOut}
+              className="bg-white rounded-2"
+              onChange={(e) => setCheckOut(e.target.value)}
+              min={
+                checkIn
+                  ? new Date(new Date(checkIn).getTime() + 86400000).toISOString().split('T')[0]
+                  : new Date().toISOString().split('T')[0]
+              }
+            />
+          </div>
+        </div>
+        <div className='d-flex justify-content-center mt-5'>
+        
+              <button
+                type="button"
+                onClick={handleSubmitPrompt}
+                disabled={!fromLocation || !toLocation || !checkIn || !checkOut}
+                className="btn btn-primary p-3 text-center rounded-3"
+                style={{
+                  opacity: (!fromLocation || !toLocation || !checkIn || !checkOut) ? 0.5 : 1,
+                  cursor: (!fromLocation || !toLocation || !checkIn || !checkOut) ? 'not-allowed' : 'pointer'
+                }}
+              >
+                Explore Now
+              </button>
+        </div>
+      </div>
+    </div>
   );
 };
+
 
 const ManufacturingLandingPage = ({
  source = RunInitiativeSource.Native,

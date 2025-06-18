@@ -12,12 +12,23 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@azure/ai-agents": "^1.0.0-beta.4",
+    "@azure/ai-projects": "^1.0.0-beta.8",
+    "@azure/arm-cognitiveservices": "^7.6.0",
+    "@azure/arm-machinelearning": "^3.0.0",
+    "@azure/arm-resourcegraph": "^4.2.1",
+    "@azure/arm-resources": "^6.1.0",
     "@azure/cognitiveservices-qnamaker-runtime": "^1.0.1",
-    "@azure/identity": "^4.10.0",
+    "@azure/core-http": "^3.0.5",
+    "@azure/core-rest-pipeline": "^1.21.0",
+    "@azure/identity": "^4.10.1",
     "@azure/ms-rest-azure-js": "^2.1.0",
+    "@azure/openai": "^2.0.0",
     "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "fs": "^0.0.1-security",
+    "multer": "^2.0.1",
     "path": "^0.12.7",
     "uuid": "^11.1.0"
   },
@@ -26,6 +37,7 @@
     "@types/express": "^5.0.3",
     "@types/node": "^24.0.0",
     "@types/uuid": "^10.0.0",
+    "nodemon": "^3.1.10",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
   }
