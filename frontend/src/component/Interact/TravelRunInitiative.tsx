@@ -1,5 +1,4 @@
 import { useEffect, useRef, FormEvent, useState, Suspense, FC, useMemo } from 'react';
-// import { useCardTitle } from '../../contexts/CardTitleContext';
 import { useDropzone } from 'react-dropzone';
 import apiService from '../../service/apiService';
 import Markdown from 'react-markdown';
@@ -159,7 +158,6 @@ export default function TravelRunInitiative({
   isExpanded: boolean;
   interactHeight: boolean;
 }) {
-  const CardTitle = 'Run Initiative';
 
   // const { initiatives } = useInitiativeStore();
   const { selectedAgent,setLoading, setSelectedAgent, selectedInitiative, setSelectedInitiative,
@@ -169,13 +167,7 @@ export default function TravelRunInitiative({
     setRunTravel,
     runManufacturing,
     setRunManufacturing,
-    // chatHistory,
-    addChatEntry,
-    updateChatEntry,
-    clearChatHistory,
-    // currentSession,
-    // setCurrentSession,
-    activeTopic,
+    updateCardTitle,
     setActiveTopic
    } =
     useApi();
@@ -195,7 +187,12 @@ export default function TravelRunInitiative({
     guardrailName: string;
   } | null>(null);
 
- 
+   const CardTitle = 'POP Travel Agency';
+
+   useEffect(() => {
+    updateCardTitle(CardTitle);
+  }, []);
+
 const [fromLocation, setFromLocation] = useState(null);
   const [toLocation, setToLocation] = useState(null);
   const [checkIn, setCheckIn] = useState('');
@@ -993,7 +990,7 @@ CHECK-OUT DATE: ${checkOut}`;
   }, [filteredChatHistory]);
 
   return (
-    <div className={`${runTravel && 'travel-run-container'} ${runManufacturing && 'manufacturing-run-container'} ${interactHeight ? 'h-100' : 'h-100'}`}>
+    <div className={`travel-run-container ${interactHeight ? 'h-100' : 'h-100'}`}>
       <div className="container-margin-left" style={{ display: 'flex', height: '100%' }}>
         <div className="row w-100">
           <div className=" overflow-scroll-y d-flex h-100">
@@ -1230,72 +1227,6 @@ CHECK-OUT DATE: ${checkOut}`;
                 <form
                   className={`chat-window no-border w-100 ${interactHeight && !isExpanded ? ' mb-3' : ''}`}
                   onSubmit={handleFormSubmit}>
-                {/* {filteredChatHistory.length === 0 && (
-                  <div>
-                    <button
-                            type="submit"
-                            // onClick={handleSubmitPrompt}
-                            disabled={!fromLocation || !toLocation || !checkIn || !checkOut}
-                            className="btn btn-primary p-3 text-center rounded-3"
-                            style={{
-                            opacity: (!fromLocation || !toLocation || !checkIn || !checkOut) ? 0.5 : 1,
-                            cursor: (!fromLocation || !toLocation || !checkIn || !checkOut) ? 'not-allowed' : 'pointer'
-                            }}
-                            onClick={() => {
-                            const prompt = prepareTravelPrompt();
-                            if (prompt) {
-                            
-                                setChatInput(prompt);
-                            }
-                            }}
-                        >
-                        Explore Now
-                        </button>
-                    </div>
-                    )} */}
-                  {/* The input group for text message & file input */}
-                  {/* {filteredChatHistory.length > 0 && ( */}
-                  <div className="input-group">
-                    <textarea
-                      className="form-control shadow-none no-border chat_input font-italic auto-resize text-area-custom-style max-h-[25dvh]"
-                      name="chat_text"
-                      placeholder="Message agent"
-                      aria-label="Chat input"
-                      // value={chatInput} // <-- Controlled value
-                      onChange={(e) => setChatInput(e.target.value)} // <-- Update our local state
-                      ref={textareaRef}
-                      onKeyDown={handleKeyDown}
-                    />
-                    <span
-                      className="input-group-text right-rounded-bg d-flex no-border"
-                      style={{ gap: '0.5rem' }}>
-                      {/* Send button */}                  
-                        <div className='d-flex justify-content-center mt-5'>
-                    
-                        
-                        <button
-                                    type="submit"
-                                    className="btn btn-white p-2 rounded-circle small-blue-box">
-                                    <img
-                                    className="arrow-up-icon"
-                                    alt="Send"
-                                    src="/arrow_upward_alt_24dp.svg"
-                                    />
-                                </button>
-                        </div>
-                    </span>
-                  </div>
-                  {/* )} */}
-                </form>
-              </div>
-                 )}
-                 <div
-                className={`p-1 ${source === RunInitiativeSource.Interact && !isExpanded ? '' : 'mx-129'} mb-3 `}
-                {...getRootProps()}
-                style={{ display: 'flex' }}>
-                <form
-                  className={`chat-window no-border w-100 ${interactHeight && !isExpanded ? ' mb-3' : ''}`}
-                  onSubmit={handleFormSubmit}>
                   {/* Preview Container */}
                   {selectedFiles.length > 0 && (
                     <div
@@ -1366,30 +1297,7 @@ CHECK-OUT DATE: ${checkOut}`;
                     <span
                       className="input-group-text right-rounded-bg d-flex no-border"
                       style={{ gap: '0.5rem' }}>
-                      <label
-                        className="clip-icon"
-                        style={{ transform: 'rotate(0deg)' }}
-                        onClick={handlePaperclipClick}>
-                        <i
-                          className="fas fa-paperclip mt-2 mr-1"
-                          style={{
-                            color: '#898c91',
-                            fontSize: '24px',
-                            cursor: 'pointer',
-                            transform: 'rotate(-45deg)'
-                          }}
-                        />
-                      </label>
-                      <input
-                        id="file-input"
-                        type="file"
-                        ref={fileInputRef}
-                        onChange={(e) => handleFileChange(e.target.files)}
-                        multiple
-                        accept={allowedFileTypes}
-                        style={{ display: 'none' }}
-                      />
-
+                      
                       {/* Send button */}
                       <button
                         type="submit"
@@ -1404,6 +1312,7 @@ CHECK-OUT DATE: ${checkOut}`;
                   </div>
                 </form>
               </div>
+            )}
             </div>
           </div>
         </div>
@@ -1893,6 +1802,7 @@ const TravelLandingPage = ({
               styles={{
                 container: (provided) => ({
                   ...provided,
+                  width: '250px'
                 }),
                 control: (provided) => ({
                   ...provided,
