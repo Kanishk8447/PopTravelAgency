@@ -10,10 +10,10 @@ const InitiativeStepper = ({ currentStep }: InitiativeStepperProps) => {
     // { stepNumber: 2, heading: 'Orchestration', status: 'Pending' },
     // { stepNumber: 2, heading: 'Settings', status: 'Pending' },
     // { stepNumber: 3, heading: 'Cloud Provider, Model Selection and Guardrails', status: 'Pending' },
-    { stepNumber: 2, heading: 'Guardrails', status: 'Pending' }, // Add Guardrails step
-    { stepNumber: 3, heading: 'Tags', status: 'Pending' },
-    { stepNumber: 4, heading: 'RAG Management', status: 'Pending' },
-    { stepNumber: 5, heading: 'Final Review', status: 'Pending' }
+    // { stepNumber: 2, heading: 'Guardrails', status: 'Pending' }, // Add Guardrails step
+    { stepNumber: 2, heading: 'Tags', status: 'Pending' },
+    // { stepNumber: 4, heading: 'RAG Management', status: 'Pending' },
+    { stepNumber: 3, heading: 'Final Review', status: 'Pending' }
   ];
   const dictLength = Object.keys(stepsData).length;
 
@@ -21,7 +21,7 @@ const InitiativeStepper = ({ currentStep }: InitiativeStepperProps) => {
     <ul className="progressStep ">
       {stepsData.map((item, index) => (
         <li
-          style={{ width: '20%' }}
+          style={{ width: '40%' }}
           key={index}
           className={currentStep >= item.stepNumber ? 'completed' : ''}>
           {index < dictLength - 1 && (

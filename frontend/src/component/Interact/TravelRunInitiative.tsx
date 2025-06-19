@@ -872,7 +872,8 @@ CHECK-OUT DATE: ${checkOut}`;
     setDisableButton(true);
 
     try {
-       const endpoint = `initiative/27eba2d3-f039-477c-9eee-64847c7709df`;
+    //    const endpoint = `initiative/27eba2d3-f039-477c-9eee-64847c7709df`;
+    const endpoint =`initiative/3f05c650-a95b-4056-803e-25a718fc3de1`; // POP Travel Agency
     //   const endpoint = `initiative/${selectedInitiative?.id}`;
   const apiBaseUrl = import.meta.env.VITE_REACT_APP_API_BASE_URL;
 
@@ -1129,11 +1130,11 @@ CHECK-OUT DATE: ${checkOut}`;
                 container: (provided) => ({
                   ...provided,
                 }),
-                control: (provided) => ({
-                  ...provided,
-                  border: 'none',
-                  boxShadow: 'none'
-                })
+                // control: (provided) => ({
+                //   ...provided,
+                //   border: 'none',
+                //   boxShadow: 'none'
+                // })
               }}
             />
           </div>
@@ -1149,11 +1150,11 @@ CHECK-OUT DATE: ${checkOut}`;
                   ...provided,
                   width: '250px'
                 }),
-                control: (provided) => ({
-                  ...provided,
-                  border: 'none',
-                  boxShadow: 'none'
-                })
+                // control: (provided) => ({
+                //   ...provided,
+                //   border: 'none',
+                //   boxShadow: 'none'
+                // })
               }}
             />
             

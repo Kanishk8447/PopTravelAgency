@@ -573,7 +573,7 @@ const InitiativeWizard = () => {
       if (editingInitiative) {
         result = await apiService.postData(`initiative/update/${editingInitiative.id}`, data);
       } else {
-        result = await apiService.postData('create', data);
+        result = await apiService.postData('api/initiative/create', data);
       }
 
       const formData = new FormData();

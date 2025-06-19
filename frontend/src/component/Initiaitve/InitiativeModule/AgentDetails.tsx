@@ -1136,113 +1136,8 @@ const AgentDetails = ({
                           {/* Memory & Guardrails toggles below model select */}
                           {formValues.cloud === 'AWS' ? (
                             <div className="row mt-3" style={{ marginLeft: 1 }}>
-                              <div className="col-md-6">
-                                <div style={{ fontWeight: 600, fontSize: 14, marginBottom: 4 }}>
-                                  Memory
-                                </div>
-                                <div
-                                  style={{
-                                    display: 'inline-flex',
-                                    background: '#f7f8fa',
-                                    borderRadius: 24,
-                                    padding: 2,
-                                    gap: 0
-                                  }}>
-                                  <button
-                                    type="button"
-                                    style={{
-                                      border: 'none',
-                                      background: agents[activeTab]?.memory
-                                        ? '#5a8ca5'
-                                        : 'transparent',
-                                      color: agents[activeTab]?.memory ? '#fff' : '#7a8a99',
-                                      padding: '6px 22px',
-                                      borderRadius: 24,
-                                      fontWeight: 500,
-                                      fontSize: 15,
-                                      outline: 'none',
-                                      cursor: 'pointer',
-                                      transition: 'background 0.2s, color 0.2s'
-                                    }}
-                                    onClick={() => handleAgentChange(activeTab, 'memory', true)}>
-                                    Enable
-                                  </button>
-                                  <button
-                                    type="button"
-                                    style={{
-                                      border: 'none',
-                                      background: !agents[activeTab]?.memory
-                                        ? '#5a8ca5'
-                                        : 'transparent',
-                                      color: !agents[activeTab]?.memory ? '#fff' : '#7a8a99',
-                                      padding: '6px 22px',
-                                      borderRadius: 24,
-                                      fontWeight: 500,
-                                      fontSize: 15,
-                                      outline: 'none',
-                                      cursor: 'pointer',
-                                      transition: 'background 0.2s, color 0.2s'
-                                    }}
-                                    onClick={() => handleAgentChange(activeTab, 'memory', false)}>
-                                    Disable
-                                  </button>
-                                </div>
-                              </div>
-                              <div className="col-md-6">
-                                <div style={{ fontWeight: 600, fontSize: 14, marginBottom: 4 }}>
-                                  Guardrails
-                                </div>
-                                <div
-                                  style={{
-                                    display: 'inline-flex',
-                                    background: '#f7f8fa',
-                                    borderRadius: 24,
-                                    padding: 2,
-                                    gap: 0
-                                  }}>
-                                  <button
-                                    type="button"
-                                    style={{
-                                      border: 'none',
-                                      background: agents[activeTab]?.guardrail
-                                        ? '#5a8ca5'
-                                        : 'transparent',
-                                      color: agents[activeTab]?.guardrail ? '#fff' : '#7a8a99',
-                                      padding: '6px 22px',
-                                      borderRadius: 24,
-                                      fontWeight: 500,
-                                      fontSize: 15,
-                                      outline: 'none',
-                                      cursor: 'pointer',
-                                      transition: 'background 0.2s, color 0.2s'
-                                    }}
-                                    onClick={() => handleAgentChange(activeTab, 'guardrail', true)}>
-                                    Enable
-                                  </button>
-                                  <button
-                                    type="button"
-                                    style={{
-                                      border: 'none',
-                                      background: !agents[activeTab]?.guardrail
-                                        ? '#5a8ca5'
-                                        : 'transparent',
-                                      color: !agents[activeTab]?.guardrail ? '#fff' : '#7a8a99',
-                                      padding: '6px 22px',
-                                      borderRadius: 24,
-                                      fontWeight: 500,
-                                      fontSize: 15,
-                                      outline: 'none',
-                                      cursor: 'pointer',
-                                      transition: 'background 0.2s, color 0.2s'
-                                    }}
-                                    onClick={() =>
-                                      handleAgentChange(activeTab, 'guardrail', false)
-                                    }>
-                                    Disable
-                                  </button>
-                                </div>
-                              </div>
-                              <div className="col-md-6">
+                              
+                              {/* <div className="col-md-6">
                                 {formValues.cloud === 'AWS' && (
                                   <div className="col-md-12 p-0 mt-3">
                                     <div style={{ fontWeight: 600, fontSize: 14, marginBottom: 4 }}>
@@ -1312,7 +1207,7 @@ const AgentDetails = ({
                                     </div>
                                   </div>
                                 )}
-                              </div>
+                              </div> */}
                             </div>
                           ) : (
                             // Render an empty space to reserve height when toggles are not visible
@@ -1323,12 +1218,12 @@ const AgentDetails = ({
                     </div>
 
                     <div className="col-md-7">
-                      <div style={{ fontWeight: 600, fontSize: 14, marginBottom: -40 }}>
+                      {/* <div style={{ fontWeight: 600, fontSize: 14, marginBottom: -40 }}>
                         Agent Prompt
-                      </div>
+                      </div> */}
                       <TextAreaComponent
                         name={`agent_character_${activeTab}`}
-                        label=""
+                        label="Agent Prompt"
                         onTextChange={(name, value) =>
                           handleAgentChange(activeTab, 'agent_character', value)
                         }
@@ -1352,7 +1247,7 @@ const AgentDetails = ({
                         }}
                         placeholder="Text goes here...!"
                       />
-                      <div style={{ marginTop: -6 }}>
+                      {/* <div style={{ marginTop: -6 }}>
                         <div style={{ fontWeight: 600, fontSize: 14, marginBottom: 4 }}>Tags</div>
                         <input
                           type="text"
@@ -1362,24 +1257,11 @@ const AgentDetails = ({
                           onChange={(e) => handleAgentChange(activeTab, 'tags', e.target.value)}
                           disabled
                         />
-                      </div>
+                      </div> */}
                     </div>
                   </div>
 
-                  {/* Tags input below
-            <div className="row mt-3">
-              <div className="col-md-3"></div>
-              <div className="col-md-8">
-                <div style={{ fontWeight: 600, fontSize: 14, marginBottom: 4 }}>Tags</div>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Text goes here...!"
-                  value={agents[activeTab]?.tags || ''}
-                  onChange={(e) => handleAgentChange(activeTab, 'tags', e.target.value)}
-                />
-              </div> */}
-                  {/* </div> */}
+                 
                 </div>
               )
             )}
