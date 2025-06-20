@@ -8,12 +8,10 @@ const axiosInstance = axios.create({
 });
 
 const cloudProvider = import.meta.env.VITE_REACT_APP_CLOUD_PROVIDER || 'azure';
-
 // Add a request interceptor
 axiosInstance.interceptors.request.use(
   (config) => {
     const accessToken = localStorage.getItem('accessToken');
-
     if (cloudProvider.toLowerCase() === 'aws') {
       const idToken = localStorage.getItem('idToken');
       if (accessToken) {

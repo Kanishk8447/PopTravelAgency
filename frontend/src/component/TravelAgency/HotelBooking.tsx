@@ -13,7 +13,6 @@ const HotelBooking = () => {
   const handleBookHotel = () => {
     // For simplicity, we'll just log the booking details to the console.
     // In a real application, you'd send this data to a backend server.
-    console.log('Booking Details:', {
       location,
       checkInDate,
       checkOutDate,

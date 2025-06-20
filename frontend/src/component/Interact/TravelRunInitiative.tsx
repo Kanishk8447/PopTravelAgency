@@ -529,23 +529,23 @@ CHECK-OUT DATE: ${checkOut}`;
 //   }, [chatHistory, runInitiative, runTravel, runManufacturing, setActiveTopic, showTravelChat]);
 
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await apiService.getData('api/initiative/list');
-        if (response) {
-          setInitiatives(response);
-        }
-      } catch (error) {
-        setLoading(false);
-        console.error('Error:', error);
-        notification('error', 'Failed to search. Try again!');
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await apiService.getData('api/initiative/list');
+  //       if (response) {
+  //         setInitiatives(response);
+  //       }
+  //     } catch (error) {
+  //       setLoading(false);
+  //       console.error('Error:', error);
+  //       notification('error', 'Failed to search. Try again!');
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   }
+  //   fetchData();
+  // }, []);
 
   const location = useLocation();
 
@@ -926,14 +926,19 @@ CHECK-OUT DATE: ${checkOut}`;
 
         // Check if the response has data property (wrapped in ApiResponse)
         // const responseData = response.data || response;
-
+        const accessToken = localStorage.getItem('accessToken');
+        if (!accessToken) {
+          console.error('Access token not found in localStorage');
+          return;
+        }
 
             const response = await fetch(`${apiBaseUrl}/api/${endpoint}`, {
  method: 'POST',
       // mode: 'no-cors',
       headers: {
         ...commonHeaders,
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+          'Authorization': `Bearer ${accessToken}`
       },
       body: JSON.stringify(payload)
     });
@@ -942,7 +947,6 @@ CHECK-OUT DATE: ${checkOut}`;
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
  const responseData = await response.json();
-    console.log('sdds',responseData.output_text)
         
           // Remove the loading state from chat history
           setChatHistory((prev) =>

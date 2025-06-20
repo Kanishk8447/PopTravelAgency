@@ -42,7 +42,7 @@ const InitiativeDetails = () => {
     const fetchModelList = async () => {
       try {
         setLoading(true);
-        const response = await apiService.getData('model/list');
+        const response = await apiService.getData('api/model/list');
         if (response) {
           setAllModels(response);
         }
@@ -56,7 +56,7 @@ const InitiativeDetails = () => {
   }, []);
 
   // Find the current model's label
-  const currentModel = allModels.find((model) => model.name === initiative?.llms?.name);
+  const currentModel = allModels?.find((model) => model.name === initiative?.llms?.name);
   const modelLabel = currentModel ? currentModel.label : initiative?.llms?.name;
 
   return (

@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 // import { useUserStore } from '../store/userStore';
 import Header from '../../header/Header';
 import Sidebar from '../../sidebar/Sidebar';
+import apiService from '../../service/apiService';
 
 export default function Welcome() {
   const [isSidebarOpen, setSidebarOpen] = useState(true);
@@ -16,6 +17,69 @@ export default function Welcome() {
       setSidebarOpen(isOpen);
     }
   };
+  
+  // const fetchDataWithAuth = async () => {
+  //   try {
+  //     const accessToken = localStorage.getItem('accessToken');
+  //     if (!accessToken) {
+  //       console.error('Access token not found in localStorage');
+  //       return;
+  //     }
+      
+  //     const response = await fetch('https://foundation-dev-hyfrcgbcckagbahe.a03.azurefd.net/api/', {
+  //       method: 'GET',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         'Authorization': `Bearer ${accessToken}`
+  //       },
+  //     });
+      
+  //     if (!response.ok) {
+  //       throw new Error(`API request failed with status: ${response.status}`);
+  //     }
+      
+  //     const data = await response.json();
+  //     console.log('API Response:', data);
+  //     return data;
+  //   } catch (error) {
+  //     console.error('Error fetching data:', error);
+  //   }
+  // };
+    const apiBaseUrl = import.meta.env.VITE_REACT_APP_API_BASE_URL;
+  
+  const getDetails = async () => {
+     try {
+      const accessToken = localStorage.getItem('accessToken');
+      if (!accessToken) {
+        console.error('Access token not found in localStorage');
+        return;
+      }
+      
+      const response = await fetch(`${apiBaseUrl}/api/users/details`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${accessToken}`
+        },
+      });
+      
+      if (!response.ok) {
+        throw new Error(`API request failed with status: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      console.log('API Response:', data);
+      return data;
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  useEffect(() => {
+    getDetails();
+  }, []);
+
+
   return (
     <>
       <Header />
@@ -30,6 +94,9 @@ export default function Welcome() {
                     <div className="card-body position-relative">
                       <div className="top-message mt-2">
                       </div>
+                      {/* <button onClick = {getDetails}>
+                        HI
+                        </button> */}
                       <div className="row justify-content-center mt-5 pt-5">
                         <div className="col-md-10 ">
                               <div className="mt-70 d-flex flex-column">

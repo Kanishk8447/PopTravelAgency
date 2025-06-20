@@ -490,7 +490,6 @@ export default function Hero() {
       try {
         // Make a call to your backend API with the selected data
         const response = await apiService.getData('list');
-        console.log('done',response)
         if (response) {
         
           notification('success', 'Search successful!');
@@ -587,11 +586,7 @@ export default function Hero() {
     // e.preventDefault();
     // For simplicity, we'll just log the booking details to the console.
     // In a real application, you'd send this data to a backend server.
-    console.log('Booking Details:', {
-      hotel: hotel.hotelName,
-      checkInDate,
-      checkOutDate
-    });
+   
     // alert('Hotel booked successfully!');
     setIsLoading(true);
     setTimeout(() => {

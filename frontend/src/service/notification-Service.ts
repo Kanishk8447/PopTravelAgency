@@ -46,7 +46,6 @@ export const notification = (
       break;
   }
 };
-{console.log('notification service')}
 export const promiseToast = async <T>(
   promiseFunction: () => Promise<T>,
   messages: { loading: string; success: (data: T) => string; error: (err: any) => string }

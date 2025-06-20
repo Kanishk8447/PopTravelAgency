@@ -608,22 +608,27 @@ useEffect(() => {
         // Check if the response has data property (wrapped in ApiResponse)
         // const responseData = response.data || response;
 
+         const accessToken = localStorage.getItem('accessToken');
+      if (!accessToken) {
+        console.error('Access token not found in localStorage');
+        return;
+      }
 
             const response = await fetch(`${apiBaseUrl}/api/${endpoint}`, {
- method: 'POST',
-      // mode: 'no-cors',
-      headers: {
-        ...commonHeaders,
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify(payload)
-    });
+              method: 'POST',
+                    // mode: 'no-cors',
+                    headers: {
+                      ...commonHeaders,
+                      'content-type': 'application/json',
+                      'Authorization': `Bearer ${accessToken}`
+                    },
+                    body: JSON.stringify(payload)
+                  });
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
- const responseData = await response.json();
-    console.log('sdds',responseData.output_text)
+                  if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                  }
+        const responseData = await response.json();
         
           // Remove the loading state from chat history
           setChatHistory((prev) =>

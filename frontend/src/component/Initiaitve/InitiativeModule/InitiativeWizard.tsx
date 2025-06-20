@@ -91,65 +91,6 @@ const InitiativeWizard = () => {
 
   const CardTitle = editingInitiative ? 'Update Initiative' : 'Create Initiative';
 
-
-    useEffect(()=>{
-      const fetchData= async ()=>{
-        try {
-          // Make a call to your backend API with the selected data
-          const response = await apiService.getData('debug-project');
-          console.log('done',response)
-          if (response) {
-          
-            notification('success', 'Search successful!');
-          }
-        } catch (error) {
-          setLoading(false);
-          console.error('Error:', error);
-          notification('error', 'Failed to search. Try again!');
-        } finally {
-          setLoading(false);
-        }
-      }
-      fetchData();
-    }, []);
-
-    useEffect(()=>{
-      const fetchData= async ()=>{
-        try {
-          // Make a call to your backend API with the selected data
-          const response = await apiService.getData('list-ai-resources');
-          console.log('donsssssse',response)
-          
-        } catch (error) {
-          setLoading(false);
-          console.error('Error:', error);
-          notification('error', 'Failed to search. Try again!');
-        } finally {
-          setLoading(false);
-        }
-      }
-      fetchData();
-    }, []);
-      
-     useEffect(()=>{
-      const fetchData= async ()=>{
-        try {
-          // Make a call to your backend API with the selected data
-          const response = await apiService.getData('agents');
-          console.log('donsssssslist-ai-resources-and-projectse',response)
-          
-        } catch (error) {
-          setLoading(false);
-          console.error('Error:', error);
-          notification('error', 'Failed to search. Try again!');
-        } finally {
-          setLoading(false);
-        }
-      }
-      fetchData();
-    }, []);
-    
-
   useEffect(() => {
     if (location.pathname.includes('update-initiative-wizard') && !editingInitiative) {
       notification('error', 'Please select an initiative to update.');
@@ -402,7 +343,7 @@ const InitiativeWizard = () => {
       try {
         // const response = await apiService.getData('initiative/list');
         const response = await apiService.getData(
-          `initiatives`
+          `api/initiative/list`
         );
 
         // Extract agent names from all initiatives for validation
@@ -619,10 +560,10 @@ const InitiativeWizard = () => {
           // fetchInitiatives();
           // fetchInitiatives(storedUserJSON?.project_id, true);
 
-          // setTimeout(() => {
-          //   navigate(`/welcome`);
-          //   window.location.reload();
-          // }, 1000);
+          setTimeout(() => {
+            navigate(`/welcome`);
+            // window.location.reload();
+          }, 1000);
         } else {
           notification(
             'error',

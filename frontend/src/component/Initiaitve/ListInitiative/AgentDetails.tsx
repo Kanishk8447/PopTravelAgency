@@ -87,7 +87,7 @@ const AgentDetails = () => {
     const fetchModelList = async () => {
       try {
         setLoading(true);
-        const response = await apiService.getData('model/list');
+        const response = await apiService.getData('api/model/list');
         if (response) {
           setAllModels(response);
         }

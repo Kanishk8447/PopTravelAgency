@@ -924,7 +924,6 @@ const [fromLocation, setFromLocation] = useState(null);
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
  const responseData = await response.json();
-    console.log('sdds',responseData.output_text)
         
           // Remove the loading state from chat history
           setChatHistory((prev) =>

@@ -16,10 +16,7 @@ const Orchestration = ({
   useEffect(() => {
     // Set default orchestration role based on editingInitiative and is_multiagent
     if (editingInitiative) {
-      console.log(
-        'Editing initiative detected, setting orchestration role...',
-        formValues.is_multiagent
-      );
+      
       const defaultRole = formValues.is_multiagent ? 'Supervisor' : 'User';
       handleChange('orchestration', defaultRole, 'select');
     }

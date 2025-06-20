@@ -10,25 +10,30 @@ import InitiativeManagement from '../component/Initiaitve/ListInitiative/Initiat
 import InitiativeDetails from '../component/Initiaitve/ListInitiative/InitiativeDetails';
 import AgentDetails from '../component/Initiaitve/ListInitiative/AgentDetails';
 import LoginPage from '../../auth/LoginPage';
+import Callback from '../../auth/Callback';
+import OAuthRedirect from '../../auth/OAuthRedirect';
+import OAuthCallback from '../../auth/OAuthCallback';
+
 import ProtectedRoute from './ProtectedRoute';
 import RedirectIfAuthenticated from './RedirectIfAuthenticated';
 import RunInitiative from '../component/Interact/RunInitiative';
 import { RunInitiativeSource } from '../component/Interact/RunInitiativeSourceEnum';
 import TravelRunInitiative from '../component/Interact/TravelRunInitiative';
 import ManufacturingInitiative from '../component/Interact/ManufacturingInitiative';
+import { Logout } from '../component/Logout';
 
 const router = createBrowserRouter([
  
+      // { path: '/welcome', element: <WelcomePage /> },
 
 { 
     path: '/', 
     element: React.createElement(RedirectIfAuthenticated, { children: React.createElement(LoginPage) })
   },
-  { 
-    path: '/login', 
-    element: React.createElement(RedirectIfAuthenticated, { children: React.createElement(LoginPage) })
-  },
+ 
     { path: '/create-initiative-wizard', element: React.createElement(ProtectedRoute, { element: React.createElement(InitiativeWizard) }) },
+      { path: '', element: React.createElement(ProtectedRoute, { element: React.createElement(WelcomePage) }) },
+
   { path: '/welcome', element: React.createElement(ProtectedRoute, { element: React.createElement(WelcomePage) }) },
   { 
     path: '',
@@ -37,17 +42,6 @@ const router = createBrowserRouter([
     children: [
       
       { path: '/travel', element: React.createElement(Hero) },
-      // { path: 'travel-agency', element: React.createElement(RunInitiative, {
-      //           source: RunInitiativeSource.Native,
-      //           isExpanded: false,
-      //           interactHeight: false
-      //         })},
-      //         { path: 'manufacturing-agency', element: React.createElement(RunInitiative, {
-      //           source: RunInitiativeSource.Native,
-      //           isExpanded: false,
-      //           interactHeight: false
-      //         })},
-
       { path: 'run-initiative', element: React.createElement(RunInitiative, {
                 source: RunInitiativeSource.Native,
                 isExpanded: false,
@@ -76,26 +70,31 @@ const router = createBrowserRouter([
   },
 
 
-      // { path: '/welcome', element: React.createElement(WelcomePage) },
-      // { path: '/create-initiative-wizard', element: React.createElement(InitiativeWizard) },
+
+ { 
+    path: '/login', 
+    element: React.createElement(RedirectIfAuthenticated, { children: React.createElement(LoginPage) })
+  },
+  { path: '/logout', element: React.createElement(Logout) },
+  // { 
+  //   path: '/logout', 
+  //   element: React.createElement(RedirectIfAuthenticated, { children: React.createElement(Logout) })
+  // },
+   { 
+    path: '/redirect', 
+    element: React.createElement(RedirectIfAuthenticated, { children: React.createElement(Callback) })
+  },
+   { 
+    path: '/oauth-redirect', 
+    element: React.createElement(RedirectIfAuthenticated, { children: React.createElement(OAuthRedirect) })
+  },
+   { 
+    path: '/oauth-callback', 
+    element: React.createElement(RedirectIfAuthenticated, { children: React.createElement(OAuthCallback) })
+  },
 
 
-      // {
-      //       path: '',
-      //       element: React.createElement(MainModule),
-      //       errorElement: React.createElement(ErrorBoundaryPopUp),
-      //       children: [
-      //             { path:'/travel', element: React.createElement(Hero) },
-      //             {
-      //                   path: 'initiative/initiativeManagement',
-      //                   element: React.createElement(InitiativeManagement),
-      //                   children: [
-      //                   { path: 'initiative-details/:initiativeId', element: React.createElement(InitiativeDetails) },
-      //                   { path: 'initiative-details/:initiaitveId/:id', element: React.createElement(AgentDetails) }
-      //                   ]
-      //             }
-      //       ]
-      // },
+  // { path: '/oauth-callback-aws', element: <OAuthCallbackAWS /> }
 ]);
 
 export default router;

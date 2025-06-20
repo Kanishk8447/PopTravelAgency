@@ -20,6 +20,9 @@ const Header = () => {
   const handleLogout = () => {
   localStorage.removeItem('isAuthenticated');
   localStorage.removeItem('userEmail');
+  localStorage.removeItem('accessToken');
+  localStorage.removeItem('idToken');
+
   navigate('/login');
 };
 
@@ -45,7 +48,8 @@ const Header = () => {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center'
-              }}>
+              }}
+              onClick={handleTravel}>
               <button
                 className="hover-button btn btn-white rounded-circle"
                 style={{
@@ -55,7 +59,7 @@ const Header = () => {
                   justifyContent: 'center',
                   alignItems: 'center'
                 }}
-                onClick={handleTravel}>
+                >
                 <span className="profile-icon material-icons-round menu-text custom-icon" style={{marginTop: '-5px'}}>
                     travel_explore
                   </span>
@@ -69,7 +73,8 @@ const Header = () => {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center'
-              }}>
+              }}
+              onClick={handleManufacturing}>
               <button
                 className="hover-button btn btn-white rounded-circle"
                 style={{
@@ -79,7 +84,7 @@ const Header = () => {
                   justifyContent: 'center',
                   alignItems: 'center'
                 }}
-                onClick={handleManufacturing}>
+                >
                 <span className="profile-icon material-icons-round menu-text custom-icon" style={{marginTop: '-5px'}}>
                     precision_manufacturing
                   </span>
@@ -111,7 +116,7 @@ const Header = () => {
                   <div
                     className="mt-3 custom-button rounded-pill ml-4 mb-3"
                     style={{ maxWidth: '60%', cursor: 'default' }}>
-                     <button
+                     {/* <button
                      onClick={handleLogout}
                       className="rounded-link-button custom-button d-flex align-items-center justify-content-center">
                       Logout
@@ -120,7 +125,17 @@ const Header = () => {
                         style={{ marginLeft: '10px', color: '#e8eaed', fontSize: '22px' }}>
                         logout
                       </span>
-                    </button>
+                    </button> */}
+                    <Link
+                      to="/logout"
+                      className="rounded-link-button custom-button d-flex align-items-center justify-content-center">
+                      Logout
+                      <span
+                        className="material-symbols-outlined"
+                        style={{ marginLeft: '10px', color: '#e8eaed', fontSize: '22px' }}>
+                        logout
+                      </span>
+                    </Link>
                   </div>
                 </div>
               </div>

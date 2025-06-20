@@ -16,8 +16,10 @@ const InitiativeManagement = () => {
  useEffect(()=>{
       const fetchData= async ()=>{
         try {
-        const response = await apiService.getData('api/initiative/list');
-        console.log('Response:', response);
+        // const response = await apiService.getData('api/initiative/list');
+         const response = await apiService.getData(
+          `api/initiative/list`
+        );
           if (response) {
             setInitiatives(response?.data);
             // notification('success', 'Search successful!');
@@ -60,7 +62,9 @@ const InitiativeManagement = () => {
   }, [initiatives]);
 
   // Create filtered list before returning JSX
-  const filteredInitiatives = initiatives.filter((initiative) => {
+
+
+  const filteredInitiatives = initiatives?.filter((initiative) => {
     const name =
       initiative.name || (initiative.Agents?.length > 0 ? initiative.Agents[0].agent_name : '');
     return name.toLowerCase().includes(filterText.toLowerCase());
