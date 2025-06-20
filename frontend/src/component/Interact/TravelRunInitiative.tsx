@@ -16,6 +16,7 @@ import type { ChatEntry } from '../../context/ApiContext';
 import Select from 'react-select';
 import '../TravelAgency/travel.css';
 import { useLocation } from 'react-router-dom';
+import DynamicInputComponent from '../../form/DynamicInputComponent';
 
 // Define the HastNode type
 type HastNode = {
@@ -493,6 +494,18 @@ const [fromLocation, setFromLocation] = useState(null);
     }
   ];
 
+
+  const handleToChange = (event) => {
+    setToLocation(event.target.value);
+  };
+
+const handleFromChange = (event) => {
+  setFromLocation(event.target.value);
+};
+
+
+
+
   useEffect(() => {
     setLocations(locationJSON);
   }, []);
@@ -504,11 +517,18 @@ const [fromLocation, setFromLocation] = useState(null);
     }
 
     return `Travel Destination Details:
-FROM LOCATION: ${fromLocation.label}
-TO LOCATION: ${toLocation.label}
+FROM LOCATION: ${fromLocation}
+TO LOCATION: ${toLocation}
 CHECK-IN DATE: ${checkIn}
 CHECK-OUT DATE: ${checkOut}`;
   };
+
+//     return `Travel Destination Details:
+// FROM LOCATION: ${fromLocation.label}
+// TO LOCATION: ${toLocation.label}
+// CHECK-IN DATE: ${checkIn}
+// CHECK-OUT DATE: ${checkOut}`;
+//   };
   
   const [showTravelChat, setShowTravelChat] = useState(false);
   const [initiatives, setInitiatives] = useState();
@@ -1117,108 +1137,146 @@ CHECK-OUT DATE: ${checkOut}`;
                     {/* <LandingPage source={source} isExpanded={isExpanded} /> */}
                     <div className='travelAgent-chat-input-container mt-5'>
                  <div className='d-flex align-items-center justify-content-center'>
-      <div className="row">
-        <div className="col-md-12 text-center mb-4">
-          <h1 className='text-bold'>TRAVEL TO EXPLORE</h1>
-          <p className='text-bold'>Find destinations at city, state, or country levels.</p>
-        </div>
-        <div className="row searchBox mt-5">
-          <div className="col-md-3">
-            <label>From</label>
-            <Select
-              options={locations}
-              value={fromLocation}
-              onChange={setFromLocation}
-              placeholder="Search for Country..."
-              styles={{
-                container: (provided) => ({
-                  ...provided,
-                }),
-                // control: (provided) => ({
-                //   ...provided,
-                //   border: 'none',
-                //   boxShadow: 'none'
-                // })
-              }}
-            />
-          </div>
-          <div className="col-md-3">
-            <label>To</label>
-            <Select
-              options={locations}
-              value={toLocation}
-              onChange={setToLocation}
-              placeholder="Search for destination..."
-              styles={{
-                container: (provided) => ({
-                  ...provided,
-                  width: '250px'
-                }),
-                // control: (provided) => ({
-                //   ...provided,
-                //   border: 'none',
-                //   boxShadow: 'none'
-                // })
-              }}
-            />
-            
-          </div>
-          <div className="col-md-3">
-            <label>Check-in</label>
-            <input
-              type="date"
-              className="bg-white  rounded-2"
-              value={checkIn}
-              onChange={(e) => setCheckIn(e.target.value)}
-              min={new Date().toISOString().split('T')[0]}
-            />
-          </div>
-          <div className="col-md-3">
-            <label>Check-out</label>
-            <input
-              type="date"
-              value={checkOut}
-              className="bg-white rounded-2"
-              onChange={(e) => setCheckOut(e.target.value)}
-              min={
-                checkIn
-                  ? new Date(new Date(checkIn).getTime() + 86400000).toISOString().split('T')[0]
-                  : new Date().toISOString().split('T')[0]
-              }
-            />
-          </div>
-        </div>
-
-        <div className='d-flex justify-content-center mt-5'>
-            <form
-                    onSubmit={handleFormSubmit}>
-                    {chatHistory.length === 0 && (
-                    <div>
-                        <button
-                                type="submit"
-                                // onClick={handleSubmitPrompt}
-                                disabled={!fromLocation || !toLocation || !checkIn || !checkOut}
-                                className="btn btn-primary p-3 text-center rounded-3"
-                                style={{
-                                opacity: (!fromLocation || !toLocation || !checkIn || !checkOut) ? 0.5 : 1,
-                                cursor: (!fromLocation || !toLocation || !checkIn || !checkOut) ? 'not-allowed' : 'pointer'
-                                }}
-                                onClick={() => {
-                                const prompt = prepareTravelPrompt();
-                                if (prompt) {
-                                
-                                    setChatInput(prompt);
-                                }
-                                }}
-                            >
-                            Explore Now
-                            </button>
+                    <div className="row">
+                      <div className="col-md-12 text-center mb-4">
+                        <h1 className='text-bold'>TRAVEL TO EXPLORE</h1>
+                        <p className='text-bold'>Find destinations at city, state, or country levels.</p>
+                      </div>
+                      <div className="col-12 searchBox mt-5 ">
+                        <div className="col-md-3">
+                          {/* <label>From</label>
+                          <Select
+                            options={locations}
+                            value={fromLocation}
+                            onChange={setFromLocation}
+                            placeholder="Search for Country..."
+                            styles={{
+                              container: (provided) => ({
+                                ...provided,
+                              }),
+                              // control: (provided) => ({
+                              //   ...provided,
+                              //   border: 'none',
+                              //   boxShadow: 'none'
+                              // })
+                            }}
+                          /> */}
+                          
+                            <div className='row'>
+                              <div className={` col-12 p-0`}>
+                              <label className='text-bold' htmlFor={`dynamicSelect_${name}`}>From</label>
+                              <select
+                                id={`dynamicSelect_${name}`}
+                                className={`form-select dynamicSelect dynamic-select shadow-none`}
+                                name='To'
+                                value={fromLocation}
+                                onChange={handleFromChange}
+                              >
+                                <option value="">
+                                  {'Search for Country'}
+                                </option>
+                                {locations?.map((option) => (
+                                  <option key={option.label} value={option.label}>
+                                    {option.label}
+                                  </option>
+                                ))}
+                              </select>
+                            </div>
+                            </div>
+                          
                         </div>
-                        )}
-            </form>
-        </div>
-      </div>
-    </div>
+                        <div className="col-md-3">
+                        <div className=" row">
+                          
+                            <div className={` col-12 p-0`}>
+                              <label className='text-bold'htmlFor={`dynamicSelect_${name}`}>To</label>
+                              <select
+                                id={`dynamicSelect_${name}`}
+                                className={`form-select dynamicSelect dynamic-select shadow-none`}
+                                name='To'
+                                value={toLocation}
+                                onChange={handleToChange}
+                              >
+                                <option value="">
+                                  {'Search for destination'}
+                                </option>
+                                {locations?.map((option) => (
+                                  <option key={option.label} value={option.label}>
+                                    {option.label}
+                                  </option>
+                                ))}
+                              </select>
+                            </div>
+                            </div>
+                        </div>
+                        <div className="col-md-3">
+                          <div className="row">
+                            <div className=" col-12 p-0">
+                              <label className='text-bold' htmlFor={`textInput-${name}`}>
+                                Check-in
+                              </label>
+                              <input
+                                type="date"
+                                className="bg-white  rounded-2 form-control dynamic-input-value std-background shadow-none padding-top-bottom"
+                                value={checkIn}
+                                onChange={(e) => setCheckIn(e.target.value)}
+                                min={new Date().toISOString().split('T')[0]}
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="col-md-3">
+                          <div className="row">
+                            <div className=" col-12 p-0">
+                              <label className='text-bold'htmlFor={`textInput-${name}`}>
+                                Check-out
+                              </label>
+                              <input
+                                type="date"
+                                className="bg-white  rounded-2 form-control dynamic-input-value std-background shadow-none padding-top-bottom"
+                                value={checkOut}
+                                onChange={(e) => setCheckOut(e.target.value)}
+                                min={
+                              checkIn
+                                ? new Date(new Date(checkIn).getTime() + 86400000).toISOString().split('T')[0]
+                                : new Date().toISOString().split('T')[0]
+                            }
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className='d-flex justify-content-center mt-5'>
+                          <form
+                                  onSubmit={handleFormSubmit}>
+                                  {chatHistory.length === 0 && (
+                                  <div>
+                                      <button
+                                              type="submit"
+                                              // onClick={handleSubmitPrompt}
+                                              disabled={!fromLocation || !toLocation || !checkIn || !checkOut}
+                                              className="btn btn-primary p-3 text-center rounded-3"
+                                              style={{
+                                              opacity: (!fromLocation || !toLocation || !checkIn || !checkOut) ? 0.5 : 1,
+                                              cursor: (!fromLocation || !toLocation || !checkIn || !checkOut) ? 'not-allowed' : 'pointer'
+                                              }}
+                                              onClick={() => {
+                                              const prompt = prepareTravelPrompt();
+                                              if (prompt) {
+                                              
+                                                  setChatInput(prompt);
+                                              }
+                                              }}
+                                          >
+                                          Explore Now
+                                          </button>
+                                      </div>
+                                      )}
+                          </form>
+                      </div>
+                    </div>
+                  </div>
                     </div>
                   </>
             )}

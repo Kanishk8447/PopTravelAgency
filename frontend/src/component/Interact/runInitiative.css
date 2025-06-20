@@ -1082,8 +1082,8 @@
 .searchBox{
   display: flex;
       background-color: #ffffffce !important;
-      padding: 0.5rem;
-      border-radius: 0.5rem;
+      padding: 2rem;
+      border-radius: 1rem;
 }
 
 /* Chat context indicator styles */
