@@ -15,9 +15,9 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 //   useTabSync();
 
   const renderContent = () => {
-    if (auth.isLoading) {
-      return <LoadingComponent />;
-    }
+    // if (isLoading) {
+    //   return <LoadingComponent />;
+    // }
     return auth.isAuthenticated ? <AuthenticatedUserLayout children={children} /> : <Login />;
   };
 

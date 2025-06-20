@@ -283,8 +283,8 @@ useEffect(() => {
       } else {
         setSelectedAgent(selectedInitiative.Agents[0]);
       }
-    } else if (initiatives && initiatives.length > 0 && !selectedAgent && !selectedInitiative) {
-      const firstInitiativeWithAgents = initiatives.find(
+    } else if (initiatives && initiatives?.data?.length > 0 && !selectedAgent && !selectedInitiative) {
+      const firstInitiativeWithAgents = initiatives?.data?.find(
         (initiative) => initiative.Agents && initiative.Agents.length > 0
       );
       if (firstInitiativeWithAgents) {
@@ -497,10 +497,10 @@ useEffect(() => {
 
     if (disableButton) return;
 
-    // if (!selectedInitiative) {
-    //   notification('error', 'Please select an agent');
-    //   return;
-    // }
+    if (!selectedInitiative) {
+      notification('error', 'Please select an Initiative');
+      return;
+    }
 
     const trimmedText = chatInput.trim();
     const hasFiles = selectedFiles.length > 0;
@@ -692,7 +692,7 @@ useEffect(() => {
                       value={selectedAgent?.agent_id || selectedInitiative?.id || ''}
                       onChange={handleAgentChange}
                       className="agent-dropdown border-none"
-                      disabled={!initiatives || initiatives.length === 0}>
+                      disabled={!initiatives || initiatives?.data?.length === 0}>
                       {initiatives?.data.map((initiative) => {
                         if (initiative.Agents.length > 1) {
                           return (
