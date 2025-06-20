@@ -15,12 +15,12 @@ const InitiativeDetails = () => {
         const response = await apiService.getData('api/initiative/list');
             if (response) {
               setInitiatives(response?.data);
-              // notification('success', 'Search successful!');
+              // notification('success', 'Initiatives fetched successfully!');
             }
           } catch (error) {
             setLoading(false);
             console.error('Error:', error);
-            notification('error', 'Failed to search. Try again!');
+            notification('error', 'Failed to fetch Initiatives. Try again!');
           } finally {
             setLoading(false);
           }
