@@ -483,11 +483,14 @@ const AgentDetails = ({
               label="Cloud Provider"
               dynamicOptions={[
                 // { value: '', label: 'Select Cloud', disabled: true },
-                { value: 'AWS', label: 'AWS' },
-                { value: 'AZURE', label: 'Azure' }
+                { value: 'AZURE', label: 'Azure' },
+                { value: 'AWS', label: 'AWS' }
+
               ]}
               defaultValue={formValues.cloud || ''}
               onSelectChange={(name, value) => handleChange('cloud', value)}
+              
+              disabled={true}
             />
           </div>
           <div className="col-md-4">

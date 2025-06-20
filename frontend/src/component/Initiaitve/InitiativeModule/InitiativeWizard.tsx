@@ -143,7 +143,7 @@ const InitiativeWizard = () => {
   const initialValues = {
     id: '',
     type: 'Agent',
-    cloud: 'AWS',
+    cloud: 'AZURE',
     is_supervisor: '',
     name: '',
     agent_description: '',
